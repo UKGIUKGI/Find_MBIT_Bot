@@ -1,8 +1,10 @@
+![node-16.14.2](http://cdn.ggilbo.com/news/photo/202203/901729_732791_5437.jpg)
+
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
 
-  <h3 align="center">find MBTI chatbot</h3>
+  <h1 align="center">Find MBTI chatbot</h1>
 
 </div>
 
@@ -14,23 +16,10 @@
   <ol>
     <li>
       <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
     </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
@@ -51,26 +40,6 @@
 ### Built With
 
 * [Node.js](https://nodejs.org/ko/)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- GETTING STARTED -->
-## Getting Started
-
-### Prerequisites
-
-
-### Installation
-
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- USAGE EXAMPLES -->
-## Usage
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -102,23 +71,14 @@
 
 
 
-<!-- LICENSE -->
-## License
-
-
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
 <!-- CONTACT -->
 ## Contact
 
-김성욱 : so3659@khu.ac.kr
-공정훈 : kjhun1208@khu.ac.kr
-고민경: komg00@khu.ac.kr 
+*김성욱 : so3659@khu.ac.kr
+*공정훈 : kjhun1208@khu.ac.kr
+*고민경: komg00@khu.ac.kr 
 
-Project Link: [http://khuhub.khu.ac.kr/2018103692/find_mbti_bot]http://khuhub.khu.ac.kr/2018103692/find_mbti_bot)
+*Project Link : http://khuhub.khu.ac.kr/2018103692/find_mbti_bot)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
