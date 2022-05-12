@@ -1,10 +1,9 @@
-<p align="center">
-  <img width="300" height="300" src="mbti.jpg">
-</p>
+
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
 
+  <img width="300" height="300" src="mbti.jpg">
   <h1 align="center">Find MBTI chatbot</h1>
 
 </div>
