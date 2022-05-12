@@ -1,4 +1,10 @@
-![node-16.14.2](http://cdn.ggilbo.com/news/photo/202203/901729_732791_5437.jpg)
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+
+  ![node-16.14.2](http://cdn.ggilbo.com/news/photo/202203/901729_732791_5437.jpg)
+
+</div>
 
 <!-- PROJECT LOGO -->
 <br />
@@ -74,11 +80,11 @@
 <!-- CONTACT -->
 ## Contact
 
-*김성욱 : so3659@khu.ac.kr
-*공정훈 : kjhun1208@khu.ac.kr
-*고민경: komg00@khu.ac.kr 
+* 김성욱 : so3659@khu.ac.kr
+* 공정훈 : kjhun1208@khu.ac.kr
+* 고민경: komg00@khu.ac.kr 
 
-*Project Link : http://khuhub.khu.ac.kr/2018103692/find_mbti_bot)
+* Project Link : http://khuhub.khu.ac.kr/2018103692/find_mbti_bot)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
