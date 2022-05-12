@@ -1,5 +1,6 @@
-<center><img src="mbti.jpg" width="300" height="300"></center>
-
+<p align="center">
+  <img width="300" height="300" src="mbti.jpg">
+</p>
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
