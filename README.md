@@ -1,4 +1,4 @@
-<p align="center"><img src="http://cdn.ggilbo.com/news/photo/202203/901729_732791_5437.jpg" width="300" height="300"></p>
+<center><img src="mbti.jpg" width="300" height="300"></center>
 
 <!-- PROJECT LOGO -->
 <br />
