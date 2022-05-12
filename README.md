@@ -1,9 +1,4 @@
-.center {
-  display: block;
-  margin: auto;
-}
-
-![node-16.14.2](http://cdn.ggilbo.com/news/photo/202203/901729_732791_5437.jpg){: width="100" height="100"}{: .center}
+<p align="center"><img src="http://cdn.ggilbo.com/news/photo/202203/901729_732791_5437.jpg" width="300" height="300"></p>
 
 <!-- PROJECT LOGO -->
 <br />
