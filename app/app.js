@@ -19,8 +19,12 @@ apiRouter.post('/sayHello', function(req, res) {
     template: {
       outputs: [
         {
-          simpleText: {
-            text: "MBTI 검사 챗봇입니다!"
+          "basicCard": {
+            "title": "MBTI 검사 챗봇",
+            "description": "MBTI 검사 챗봇입니다! \n당신의 MBTI를 찾아보세요!",
+            "thumbnail": {
+              "imageUrl": "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fsnm5S%2Fbtq6cSXUkrD%2FOgk9QsUoPzQGvllliI0CSk%2Fimg.jpg"
+            }
           }
         }
       ]
