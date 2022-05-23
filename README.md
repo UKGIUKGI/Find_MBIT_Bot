@@ -30,7 +30,7 @@
 
 * MBTI를 알기 위해서는 딱딱한 질문식의 설문을 일일히 체크해야 합니다.
 * 저희는 그런 방식보다는 챗봇과의 대화를 통해 MBTI를 알아내는 방식을 챗봇에 적용하고자 합니다.
-* 저희 챗봇은 LINE Messaging API를 기반으로 만들어졌습니다.
+* 저희 챗봇은 Kakao Messaging API를 기반으로 만들어졌습니다.
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -48,8 +48,8 @@
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Line/kakao 채널 만들기
-- [ ] express 서버 연결
+- [x] Kakao 채널 만들기
+- [x] express 서버 연결
 - [ ] test
 - [ ] MBTI설문을 챗봇에 적용시키기
 
@@ -62,9 +62,9 @@
 ## Contributing
 
 1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
+2. Create your Feature Branch
+3. Commit your Changes
+4. Push to the Branch 
 5. Open a Pull Request
 
 <p align="right">(<a href="#top">back to top</a>)</p>
