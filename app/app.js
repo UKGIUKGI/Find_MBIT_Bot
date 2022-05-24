@@ -34,6 +34,24 @@ apiRouter.post('/sayHello', function(req, res) {
   res.status(200).send(responseBody);
 });
 
+apiRouter.post('/question3', function(req, res) {
+  const responseBody = {
+    version: "2.0",
+    template: {
+      outputs: [
+        {
+          "simpleText": {
+            "text": "다음과 같은 상황에서 어떻게 대답하겠습니까? 해당 숫자를 입력해 주세요. \n 친구: 나 기분 안 좋아서 옷 샀어 \n 1. 왜 기분 안 좋아? \n 2. 무슨 옷 샀어?"
+          }
+        }
+      ]
+    }
+  };
+
+  res.status(200).send(responseBody);
+});
+
+
 app.listen((process.env.PORT || 3000), function() {
   console.log('Example skill server listening on port 3000!');
 });
