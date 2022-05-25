@@ -1,11 +1,11 @@
 const express = require('express');
 const app = express();
-const logger = require('morgan');
+//const logger = require('morgan');
 const bodyParser = require('body-parser');
 
 const apiRouter = express.Router();
 
-app.use(logger('dev', {}));
+//app.use(logger('dev', {}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
@@ -32,6 +32,31 @@ apiRouter.post('/sayHello', function(req, res) {
   };
 
   res.status(200).send(responseBody);
+});
+
+apiRouter.post('/question1', (req, res) => {
+  const responseBody = {
+      version: "2.0",
+      template: {
+          outputs: [
+              {
+                  basicCard: {
+                      title: "사람들과 어울리는 것을 좋아하나요?",
+                      buttons: [
+                          {
+                          label: 'Yes',
+                          action: 'message'
+                      }, {
+                          label: 'No',
+                          action: 'message'
+                      }
+                      ]
+                  }
+              }
+          ]
+      }
+  }
+  res.json(responseBody);
 });
 
 apiRouter.post('/question3', function(req, res) {
