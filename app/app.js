@@ -76,6 +76,43 @@ apiRouter.post('/question3', function(req, res) {
   res.status(200).send(responseBody);
 });
 
+apiRouter.post('/Q2', function(req, res) {
+  const responseBody = {
+    version: "2.0",
+    template: {
+      outputs: [
+        {
+          simpleText: {
+            text: '평소 깻잎논쟁에 1시간 이상을 생각해봤다.\n맞다면 N 아니면 S을 입력해주세요.'
+            }
+          }
+        ]
+      }
+    };
+
+  res.status(200).send(responseBody);
+});
+
+apiRouter.post('/A2', function(req, res) {
+  
+  const userRequest = req.body.userRequest;
+  const utter = userRequest.utterance;
+
+const responseBody = {
+  version: "2.0",
+  template: {
+    outputs: [
+      {
+        simpleText: {
+          text: '당신의 MBTI는 *'+utter+'** 입니다.'
+        }
+      }
+    ]
+  }}
+
+  res.status(200).send(responseBody);
+});
+
 
 app.listen((process.env.PORT || 3000), function() {
   console.log('Example skill server listening on port 3000!');
