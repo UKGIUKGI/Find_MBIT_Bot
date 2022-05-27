@@ -34,29 +34,74 @@ apiRouter.post('/sayHello', function(req, res) {
   res.status(200).send(responseBody);
 });
 
-apiRouter.post('/question1', (req, res) => {
-  const responseBody = {
+apiRouter.post('/test', (req, res) => {
+  var utt = req.body.userRequest.utterance;
+    var data = {
+        version: "2.0",
+        template: {
+            outputs: [
+                {
+                    simpleText: {
+                        text: utt
+                    }
+                }
+            ],
+            quickReplies: [{
+                action: "block",
+                label: "테스트 시작",
+                message: "테스트 시작",
+                data: {
+                    "blockId": "628b8005055a574d7df54466",
+                    "extra": {
+                        "": ""
+                      }
+                }
+            }]
+        }
+    }
+    res.json(data);
+});
+
+app.post('/question1', (req, res) => {
+  var mesg = req.body.userRequest;
+  console.log('[user message] ', mesg);
+  var data = {
       version: "2.0",
       template: {
           outputs: [
               {
-                  basicCard: {
-                      title: "사람들과 어울리는 것을 좋아하나요?",
-                      buttons: [
-                          {
-                          label: 'Yes',
-                          action: 'message'
-                      }, {
-                          label: 'No',
-                          action: 'message'
-                      }
-                      ]
+                  simpleText: {
+                      text: '사람들과 어울리는 것을 좋아하시나요?'
                   }
+              }
+          ],
+          quickReplies: [
+              {
+              action: "block",
+              label: "네",
+              message: "네",
+              data: {
+                  "blockId": "628e8cb07bd2fd433357f878",
+                  "extra": {
+                      "": ""
+                    }
+              }
+          },
+              {
+              action: "block",
+              label: "아니오",
+              message: "아니오",
+              data: {
+                  "blockId": "628e8cb07bd2fd433357f878",
+                  "extra": {
+                      "": ""
+                    }
+              }
               }
           ]
       }
   }
-  res.json(responseBody);
+  res.json(data);
 });
 
 apiRouter.post('/question3', function(req, res) {
