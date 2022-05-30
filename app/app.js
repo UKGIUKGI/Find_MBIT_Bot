@@ -1,11 +1,11 @@
 const express = require('express');
 const app = express();
-//const logger = require('morgan');
+
 const bodyParser = require('body-parser');
 
 const apiRouter = express.Router();
 
-//app.use(logger('dev', {}));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
@@ -24,37 +24,20 @@ apiRouter.post('/sayHello', function(req, res) {
             "description": "MBTI 검사 챗봇입니다! \n당신의 MBTI를 찾아보세요!",
             "thumbnail": {
               "imageUrl": "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fsnm5S%2Fbtq6cSXUkrD%2FOgk9QsUoPzQGvllliI0CSk%2Fimg.jpg"
-            }
+            },
+            "buttons": [
+                {
+                    "action": "message",
+                    "label": "MBTI 테스트 시작하기",
+                    "messageText": "MBTI 테스트 시작하기"
+                }
+            ]
           }
         }
       ]
     }
   };
-
   res.status(200).send(responseBody);
-});
-
-apiRouter.post('/test', (req, res) => {
-  var utt = req.body.userRequest.utterance;
-  const responseBody = {
-        version: "2.0",
-        template: {
-            outputs: [
-                {
-                    simpleText: {
-                        text: utt
-                    }
-                }
-            ],
-            quickReplies: [{
-                action: "block",
-                label: "테스트 시작",
-                message: "테스트 시작",
-                blockId: "628b8005055a574d7df54466"
-            }]
-        }
-    }
-    res.status(200).send(responseBody);
 });
 
 apiRouter.post('/question1', (req, res) => {
@@ -104,7 +87,7 @@ apiRouter.post('/question2', (req, res) => {
           outputs: [
               {
                   simpleText: {
-                      text: 'mbti:'+mbti+'***\n평소 깻잎논쟁에 1시간 이상을 생각해봤다.\n맞다면 N 아니면 S을 입력해주세요.'
+                      text: 'mbti:'+mbti+'***\n\n평소 깻잎논쟁에 1시간 이상을 생각해봤다.\n맞다면 N 아니면 S을 입력해주세요.'
                   }
               }
           ],
@@ -142,7 +125,7 @@ apiRouter.post('/question3', function(req, res) {
       outputs: [
         {
           "simpleText": {
-            "text": "mbti:*"+mbti+"**\n다음과 같은 상황에서 어떻게 대답하겠습니까? 해당 숫자를 입력해 주세요. \n 친구: 나 기분 안 좋아서 옷 샀어 \n 1. 왜 기분 안 좋아? \n 2. 무슨 옷 샀어?"
+            "text": "mbti:*"+mbti+"**\n\n다음과 같은 상황에서 어떻게 대답하겠습니까?\n 친구: 나 기분 안 좋아서 옷 샀어"
           }
         }
       ],
@@ -181,7 +164,7 @@ apiRouter.post('/question4', (req, res) => {
           outputs: [
               {
                   simpleText: {
-                      text: "mbti:**"+mbti+"*\n그날 할 일에 대해 계획을 미리 세우시나요?"
+                      text: "mbti:**"+mbti+"*\n\n그날 할 일에 대해 계획을 미리 세우시나요?"
                   }
               }
           ],
@@ -227,7 +210,7 @@ apiRouter.post('/result', (req, res) => {
               action: "block",
               label: "mbti 결과 보기",
               message: "mbti 결과 보기",
-              blockId : "629045977befc3101c3be778"
+              blockId : "629045977befc3101c3be778" //mbti list로 연결
           }]
       }
   }
