@@ -180,6 +180,82 @@ apiRouter.post('/question17', (req, res) => {
     res.status(200).send(responseBody);
 });
 
+apiRouter.post('/question18', (req, res) => {
+    var userId = req.body.userRequest.user.id;
+    var mesg = req.body.userRequest;
+    var mbti = ''; 
+    if (mesg == "네") {
+        mbti = 'I';
+    } else if (mesg == "아니오") {
+        mbti = 'E';
+    }
+    const responseBody = {
+        version: "2.0",
+        template: {
+            outputs: [
+                {
+                    simpleText: {
+                        text: '[Question 18/20]\n비행기에 타기 전 만약 비행기에 테러범이 있으면 어떻게 행동할지 상상해봤다.'
+                    }
+                }
+            ],
+            quickReplies: [
+                {
+                    action: "block",
+                    label: "네",
+                    message: "네",
+                    blockId: "6294c4c2e7a0253c7662acb1"
+                },
+                {
+                    action: "block",
+                    label: "아니오",
+                    message: "아니오",
+                    blockId: "6294c4c2e7a0253c7662acb1"
+                }
+            ]
+        }
+    }
+    res.status(200).send(responseBody);
+});
+
+apiRouter.post('/question19', (req, res) => {
+    var userId = req.body.userRequest.user.id;
+    var mesg = req.body.userRequest;
+    var mbti = ''; 
+    if (mesg == "네") {
+        mbti = 'N';
+    } else if (mesg == "아니오") {
+        mbti = 'S';
+    }
+    const responseBody = {
+        version: "2.0",
+        template: {
+            outputs: [
+                {
+                    simpleText: {
+                        text: '[Question 19/20]\n친구가 취업이 안돼서 힘들어하는 상황에 당신의 반응은?'
+                    }
+                }
+            ],
+            quickReplies: [
+                {
+                    action: "block",
+                    label: "요즘 취업 어렵지 힘들겠다ㅠㅠ",
+                    message: "요즘 취업 어렵지 힘들겠다ㅠㅠ",
+                    blockId: "6294c4c8e7a0253c7662acb3"
+                },
+                {
+                    action: "block",
+                    label: "무슨 준비하고있어? 이력서는 넣어봤어?",
+                    message: "무슨 준비하고있어? 이력서는 넣어봤어?",
+                    blockId: "6294c4c8e7a0253c7662acb3"
+                }
+            ]
+        }
+    }
+    res.status(200).send(responseBody);
+});
+
 apiRouter.post('/result', (req, res) => {
     var userId = req.body.userRequest.user.id;
   var mesg = req.body.userRequest.utterance;
