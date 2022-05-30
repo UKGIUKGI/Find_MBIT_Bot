@@ -41,162 +41,67 @@ apiRouter.post('/sayHello', function(req, res) {
   res.status(200).send(responseBody);
 });
 
-apiRouter.post('/question1', (req, res) => {
-    var userId = req.body.userRequest.user.id;
-  var mesg = req.body.userRequest;
-  console.log('[q1:user message] ', mesg);
-  userDB[userId] = '';
-  console.log(userDB[userId]);
-  const responseBody = {
-      version: "2.0",
-      template: {
-          outputs: [
-              {
-                  simpleText: {
-                      text: '사람들과 어울리는 것을 좋아하시나요?'
-                  }
-              }
-          ],
-          quickReplies: [
-              {
-                  action: "block",
-                  label: "네",
-                  message: "네",
-                  blockId: "628e8cb07bd2fd433357f878"
-              },
-              {
-                  action: "block",
-                  label: "아니오",
-                  message: "아니오",
-                  blockId: "628e8cb07bd2fd433357f878"
-              }
-          ]
-      }
-  }
-  res.status(200).send(responseBody);
-});
-
-apiRouter.post('/question2', (req, res) => {
-    var userId = req.body.userRequest.user.id;
-    var mesg = req.body.userRequest.utterance;
-    console.log('[q2:user message] ', mesg);
-    var mbti = ''; 
-    if (mesg == "네") {
-        mbti = 'E';
-    } else if (mesg == "아니오") {
-        mbti = 'I';
-    }
-    userDB[userId] += mbti;
-    console.log(userDB[userId]);
-    const responseBody = {
-      version: "2.0",
-      template: {
-          outputs: [
-              {
-                  simpleText: {
-                      text: '평소 깻잎논쟁에 1시간 이상을 생각해봤다.'
-                  }
-              }
-          ],
-          quickReplies: [
-              {
-                  action: "block",
-                  label: "네",
-                  message: "네",
-                  blockId: "628d239d93b31d5b60ab6c29"
-              },
-              {
-                  action: "block",
-                  label: "아니오",
-                  message: "아니오",
-                  blockId: "628d239d93b31d5b60ab6c29"
-              }
-          ]
-      }
-  }
-  res.status(200).send(responseBody);
-});
-
-apiRouter.post('/question3', function(req, res) {
-    var userId = req.body.userRequest.user.id;
-    var mesg = req.body.userRequest.utterance;
-    console.log('[q3:user message] ', mesg);
-    var mbti = '';
-    if (mesg == '네') {
-        mbti = 'N';
-    } else if (mesg == '아니오') {
-        mbti = 'S';
-    }
-    userDB[userId] += mbti;
-    console.log(userDB[userId]);
+apiRouter.post('/test', (req, res) => {
     const responseBody = {
         version: "2.0",
         template: {
             outputs: [
                 {
-                    "simpleText": {
-                        "text": "다음과 같은 상황에서 어떻게 대답하겠습니까?\n 친구: 나 기분 안 좋아서 옷 샀어"
+                    simpleText: {
+                        text: '재밌는 MBTI 테스트'
                     }
                 }
             ],
             quickReplies: [
                 {
                     action: "block",
-                    label: "왜 기분 안 좋아?",
-                    message: "왜 기분 안 좋아?",
-                    blockId: "6290630451c40d32c6d8e71f"
+                    label: "할래!",
+                    message: "할래!",
+                    blockId: "6294c3ecf591aa1905548230"
                 },
                 {
                     action: "block",
-                    label: "무슨 옷 샀어?",
-                    message: "무슨 옷 샀어?",
-                    blockId: "6290630451c40d32c6d8e71f"
+                    label: "안 할래",
+                    message: "안 할래",
+                    blockId: "628b7ef293b31d5b60ab4b29"
                 }
             ]
         }
-    };
+    }
     res.status(200).send(responseBody);
 });
 
-apiRouter.post('/question4', (req, res) => {
+apiRouter.post('/question15', (req, res) => {
     var userId = req.body.userRequest.user.id;
-  var mesg = req.body.userRequest.utterance;
-  console.log('[q4:user message] ', mesg);
-  var mbti = ''; 
-  if (mesg == "왜 기분 안 좋아?") {
-      mbti = 'F';
-  } else if (mesg == "무슨 옷 샀어?") {
-      mbti = 'T';
-  }
-  userDB[userId] += mbti;
-  console.log(userDB[userId]);
-  const responseBody = {
-      version: "2.0",
-      template: {
-          outputs: [
-              {
-                  simpleText: {
-                      text: "그날 할 일에 대해 계획을 미리 세우시나요?"
-                  }
-              }
-          ],
-          quickReplies: [
-            {
-                action: "block",
-                label: "네",
-                message: "네",
-                blockId: "6293885b7bd2fd4333583df0"
-            },
-            {
-                action: "block",
-                label: "아니오",
-                message: "아니오",
-                blockId: "6293885b7bd2fd4333583df0"
-            }
-        ]
-      }
-  }
-  res.status(200).send(responseBody);
+    var mesg = req.body.userRequest;
+    userDB[userId] = ['','','','',''];//new Array(5);
+    const responseBody = {
+        version: "2.0",
+        template: {
+            outputs: [
+                {
+                    simpleText: {
+                        text: '친구: 우울해서 아이패드 샀어'
+                    }
+                }
+            ],
+            quickReplies: [
+                {
+                    action: "block",
+                    label: "왜ㅠㅠ무슨일 있었어?",
+                    message: "왜ㅠㅠ무슨일 있었어?",
+                    blockId: "6294c467e7a0253c7662acac"
+                },
+                {
+                    action: "block",
+                    label: "어떤 기종샀어?",
+                    message: "어떤 기종샀어?",
+                    blockId: "6294c467e7a0253c7662acac"
+                }
+            ]
+        }
+    }
+    res.status(200).send(responseBody);
 });
 
 apiRouter.post('/result', (req, res) => {
@@ -225,7 +130,7 @@ apiRouter.post('/result', (req, res) => {
               action: "block",
               label: "MBTI 테스트 다시하기",
               message: "MBTI 테스트 다시하기",
-              blockId : "628b8005055a574d7df54466"
+              blockId : "628b7ef293b31d5b60ab4b29" //to question 1
           }]
       }
   }
