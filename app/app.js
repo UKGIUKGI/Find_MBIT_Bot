@@ -13,6 +13,25 @@ app.use(bodyParser.urlencoded({
 
 app.use('/api', apiRouter);
 
+apiRouter.post("/blockId", function(req, res) {
+  const userRequest = req.body.userRequest;
+  const blockId = userRequest.block.id;
+
+  return res.send({
+    version: "2.0",
+    template: {
+      outputs: [
+        {
+          "basicCard": {
+            "title": "블록ID 입니다",
+            "description": blockId
+          }
+        }
+      ]
+    }
+  });
+});
+
 apiRouter.post('/sayHello', function(req, res) {
   const responseBody = {
     version: "2.0",
@@ -38,6 +57,156 @@ apiRouter.post('/sayHello', function(req, res) {
     }
   };
   res.status(200).send(responseBody);
+});
+
+var mbtilist = {
+  I: false,
+  E: false,
+  S: false,
+  N: false,
+  T: false,
+  F: false,
+  P: false,
+  J: false
+};
+
+var userDB = {};
+
+apiRouter.post("/add", function(req, res) {
+  const userRequest = req.body.userRequest;
+  const userId = userRequest.user.id; 
+  const usermbti = userRequest.utterance; 
+
+  if (!userDB[userId]) {
+    userDB[userId] = { ...mbtilist };
+  }
+
+  if (usermbti in mbtilist) {
+    userDB[userId][usermbti] = true;
+  }
+
+  return res.send({
+    version: "2.0",
+    template: {
+      outputs: [
+        {
+          basicCard: {
+            description: "추가 되었습니다",
+            buttons: [
+              {
+                action: "message",
+                label: "내 mbti 목록",
+                messageText: "내 mbti 목록"
+              },
+              {
+                action: "message",
+                label: "mbti 추가",
+                messageText: "mbti 추가"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  });
+});
+
+apiRouter.post("/form", function(req,res) {
+  const userRequest = req.body.userRequest;
+  const userId = userRequest.user.id;
+  let mbti = [];
+
+  if (!userDB[userId]) {
+      mbti = Object.keys(mbtilist).map(f => {
+          return {
+              action: "block",
+              label: f,
+              blockId: "62903faf7befc3101c3be587"
+          };
+      });
+  } else {
+      mbti = Object.keys(userDB[userId])
+      .filter(f => {
+          return userDB[userId][f] === false;
+      })
+      .map(f => {
+          return {
+              action: "block",
+              label: f,
+              blockId: "62903faf7befc3101c3be587"
+          };
+      });
+  }
+
+  return res.send({
+      version: "2.0",
+      template: {
+          outputs: [
+              {
+                  simpleText: {
+                      text: "추가할 mbti를 선택해 주세요"
+                  }
+              }
+          ],
+          quickReplies: mbti
+      }
+  });
+});
+
+apiRouter.post("/list", function(req, res) {
+  const userRequest = req.body.userRequest;
+  const userId = userRequest.user.id;
+  let mymbti = [];
+
+  if (userDB[userId]) {
+    mymbti = Object.keys(userDB[userId]).filter(f => {
+      return userDB[userId][f] === true;
+    });
+  }
+
+  if (mymbti.length <= 0) {
+    return res.send({
+      version: "2.0",
+      template: {
+        outputs: [
+          {
+            basicCard: {
+              description: "등록된 mbti가 없습니다",
+              buttons: [
+                {
+                  action: "message",
+                  label: "mbti 추가",
+                  messageText: "mbti 추가"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    });
+  } else {
+    return res.send({
+      version: "2.0",
+      template: {
+        outputs: [
+          {
+            basicCard: {
+              description: `현재 나의 mbti는 ${mymbti
+                .map(f => `[${f}]`)
+                .join(", ")} 입니다`,
+              buttons: [
+                {
+                  action: "message",
+                  label: "mbti 추가",
+                  messageText: "mtbi 추가"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    });
+  }
 });
 
 apiRouter.post('/question1', (req, res) => {
