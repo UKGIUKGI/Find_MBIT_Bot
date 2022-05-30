@@ -81,7 +81,7 @@ apiRouter.post('/question15', (req, res) => {
             outputs: [
                 {
                     simpleText: {
-                        text: '친구: 우울해서 아이패드 샀어'
+                        text: '[Question 15/20]\n친구: 우울해서 아이패드 샀어'
                     }
                 }
             ],
@@ -97,6 +97,82 @@ apiRouter.post('/question15', (req, res) => {
                     label: "어떤 기종샀어?",
                     message: "어떤 기종샀어?",
                     blockId: "6294c467e7a0253c7662acac"
+                }
+            ]
+        }
+    }
+    res.status(200).send(responseBody);
+});
+
+apiRouter.post('/question16', (req, res) => {
+    var userId = req.body.userRequest.user.id;
+    var mesg = req.body.userRequest;
+    var mbti = ''; 
+    if (mesg == "왜ㅠㅠ무슨일 있었어?") {
+        mbti = 'F';
+    } else if (mesg == "어떤 기종샀어?") {
+        mbti = 'T';
+    }
+    const responseBody = {
+        version: "2.0",
+        template: {
+            outputs: [
+                {
+                    simpleText: {
+                        text: '[Question 16/20]\n이메일에 가능한 빨리 회신하려고 하고 지저분한 편지함을 참을 수 없다.'
+                    }
+                }
+            ],
+            quickReplies: [
+                {
+                    action: "block",
+                    label: "네",
+                    message: "네",
+                    blockId: "6294c4755ceed96c38542a53"
+                },
+                {
+                    action: "block",
+                    label: "아니오",
+                    message: "아니오",
+                    blockId: "6294c4755ceed96c38542a53"
+                }
+            ]
+        }
+    }
+    res.status(200).send(responseBody);
+});
+
+apiRouter.post('/question17', (req, res) => {
+    var userId = req.body.userRequest.user.id;
+    var mesg = req.body.userRequest;
+    var mbti = ''; 
+    if (mesg == "네") {
+        mbti = 'J';
+    } else if (mesg == "아니오") {
+        mbti = 'P';
+    }
+    const responseBody = {
+        version: "2.0",
+        template: {
+            outputs: [
+                {
+                    simpleText: {
+                        text: '[Question 17/20]\n당일에 갑자기 잡히는 약속이 부담스럽다.'
+                    }
+                }
+            ],
+            quickReplies: [
+                {
+                    action: "block",
+                    label: "네",
+                    message: "네",
+                    blockId: "6294c4aff591aa1905548236"
+                },
+                {
+                    action: "block",
+                    label: "아니오",
+                    message: "아니오",
+                    blockId: "6294c4aff591aa1905548236"
                 }
             ]
         }
