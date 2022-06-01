@@ -76,6 +76,87 @@ apiRouter.post('/question1', (req, res) => {
   res.status(200).send(responseBody);
 });
 
+apiRouter.post('/question2', (req, res) => {
+    var userId = req.body.userRequest.user.id;
+    var mesg = req.body.userRequest.utterance;
+    console.log('[q2:user message] ', mesg);
+    var mbti = ''; 
+    if (mesg == "네") {
+        mbti = 'E';
+    } else if (mesg == "아니오") {
+        mbti = 'I';
+    }
+    userDB[userId][0] += mbti;
+    console.log(userDB[userId]);
+    const responseBody = {
+      version: "2.0",
+      template: {
+          outputs: [
+              {
+                  simpleText: {
+                      text: '평소 깻잎논쟁에 대해 1시간 이상을 생각해 보는 편입니다.'
+                  }
+              }
+          ],
+          quickReplies: [
+              {
+                  action: "block",
+                  label: "네",
+                  message: "네",
+                  blockId: "6297b122ab89e678ee86b331"
+              },
+              {
+                  action: "block",
+                  label: "아니오",
+                  message: "아니오",
+                  blockId: "6297b122ab89e678ee86b331"
+              }
+          ]
+      }
+  }
+  res.status(200).send(responseBody);
+});
+
+apiRouter.post('/question3', function(req, res) {
+    var userId = req.body.userRequest.user.id;
+    var mesg = req.body.userRequest.utterance;
+    console.log('[q3:user message] ', mesg);
+    var mbti = '';
+    if (mesg == '네') {
+        mbti = 'N';
+    } else if (mesg == '아니오') {
+        mbti = 'S';
+    }
+    userDB[userId][1] += mbti;
+    console.log(userDB[userId]);
+    const responseBody = {
+        version: "2.0",
+        template: {
+            outputs: [
+                {
+                    "simpleText": {
+                        "text": "토론 시 사람들의 민감한 반응보다 보다 진실을 더 중요시해야 합니다."
+                    }
+                }
+            ],
+            quickReplies: [
+                {
+                    action: "block",
+                    label: "네",
+                    message: "네",
+                    blockId: "6297b1275ceed96c38544a08"
+                },
+                {
+                    action: "block",
+                    label: "아니오",
+                    message: "아니오",
+                    blockId: "6297b1275ceed96c38544a08"
+                }
+            ]
+        }
+    };
+    res.status(200).send(responseBody);
+});
 
 app.listen((process.env.PORT || 3000), function() {
   console.log('Example skill server listening on port 3000!');
