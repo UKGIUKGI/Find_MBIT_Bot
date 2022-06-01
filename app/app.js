@@ -240,6 +240,88 @@ apiRouter.post('/question5', (req, res) => {
   res.status(200).send(responseBody);
 });
 
+apiRouter.post('/question6', (req, res) => {
+    var userId = req.body.userRequest.user.id;
+    var mesg = req.body.userRequest.utterance;
+    console.log('[q2:user message] ', mesg);
+    var mbti = ''; 
+    if (mesg == "네") {
+        mbti = 'E';
+    } else if (mesg == "아니오") {
+        mbti = 'I';
+    }
+    userDB[userId][0] += mbti;
+    console.log(userDB[userId]);
+    const responseBody = {
+      version: "2.0",
+      template: {
+          outputs: [
+              {
+                  simpleText: {
+                      text: '종종 인간 실존에 대한 이유를 생각합니다.'
+                  }
+              }
+          ],
+          quickReplies: [
+              {
+                  action: "block",
+                  label: "네",
+                  message: "네",
+                  blockId: "6297b133f591aa190554a260"
+              },
+              {
+                  action: "block",
+                  label: "아니오",
+                  message: "아니오",
+                  blockId: "6297b133f591aa190554a260"
+              }
+          ]
+      }
+  }
+  res.status(200).send(responseBody);
+});
+
+apiRouter.post('/question7', (req, res) => {
+    var userId = req.body.userRequest.user.id;
+    var mesg = req.body.userRequest.utterance;
+    console.log('[q2:user message] ', mesg);
+    var mbti = ''; 
+    if (mesg == "네") {
+        mbti = 'N';
+    } else if (mesg == "아니오") {
+        mbti = 'S';
+    }
+    userDB[userId][1] += mbti;
+    console.log(userDB[userId]);
+    const responseBody = {
+      version: "2.0",
+      template: {
+          outputs: [
+              {
+                  simpleText: {
+                      text: '어떤 일에서 성과를 냈을 때 “고생했어”보다 “잘했어”라는 말이 더 좋습니다.'
+                  }
+              }
+          ],
+          quickReplies: [
+              {
+                  action: "block",
+                  label: "네",
+                  message: "네",
+                  blockId: "6297b3505ceed96c38544a0a"
+              },
+              {
+                  action: "block",
+                  label: "아니오",
+                  message: "아니오",
+                  blockId: "6297b3505ceed96c38544a0a"
+              }
+          ]
+      }
+  }
+  res.status(200).send(responseBody);
+});
+
 app.listen((process.env.PORT || 3000), function() {
   console.log('Example skill server listening on port 3000!');
 });
