@@ -13,41 +13,7 @@ app.use(bodyParser.urlencoded({
 
 app.use('/api', apiRouter);
 
-function createArray(rows, columns) {
-  var arr = new Array(rows);
-  for (var i = 0; i < rows; i++) {
-    arr[i] = new Array(columns);
-  }
-  return arr;
-}
-var userDB = createArray(5, 5);
-
-apiRouter.post('/sayHello', function(req, res) {
-  const responseBody = {
-    version: "2.0",
-    template: {
-      outputs: [
-        {
-          "basicCard": {
-            "title": "MBTI 검사 챗봇",
-            "description": "MBTI 검사 챗봇입니다! \n당신의 MBTI를 찾아보세요!",
-            "thumbnail": {
-              "imageUrl": "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fsnm5S%2Fbtq6cSXUkrD%2FOgk9QsUoPzQGvllliI0CSk%2Fimg.jpg"
-            },
-            "buttons": [
-                {
-                    "action": "message",
-                    "label": "MBTI 테스트 시작하기",
-                    "messageText": "MBTI 테스트 시작하기"
-                }
-            ]
-          }
-        }
-      ]
-    }
-  };
-  res.status(200).send(responseBody);
-});
+let userDB = new Array();
 
 apiRouter.post('/test', (req, res) => {
   const responseBody = {
@@ -80,6 +46,9 @@ apiRouter.post('/test', (req, res) => {
 });
 
 apiRouter.post('/question8', (req, res) => {
+  var userId = req.body.userRequest.user.id;
+  userDB[userId] = ['','','','',''];
+  console.log(userDB);
   const responseBody = {
       version: "2.0",
       template: {
@@ -102,6 +71,47 @@ apiRouter.post('/question8', (req, res) => {
                   label: "시간과 장소를 자세하게 정한다",
                   message: "시간과 장소를 자세하게 정한다",
                   blockId: "629780e9e7a0253c7662cca6"
+              }
+          ]
+      }
+  }
+  res.status(200).send(responseBody);
+});
+
+apiRouter.post('/question9', (req, res) => {
+  var mesg = req.body.userRequest.utterance;
+  var userId = req.body.userRequest.user.id;
+  var mbti = '';
+  if (mesg == "테마만 정한다(ex.맛집 방문하는 날, 사진 찍는 날)"){
+    mbti = 'P';
+  }
+  else if (mesg == "시간과 장소를 자세하게 정한다") {
+    mbti = 'J';
+  }
+  userDB[userId][3] += mbti;
+  console.log(userDB);
+  const responseBody = {
+      version: "2.0",
+      template: {
+          outputs: [
+              {
+                  simpleText: {
+                      text: '[question9]\n재미있는 책이나 비디오 게임이 사교 모임보다 더 낫습니다.'
+                  }
+              }
+          ],
+          quickReplies: [
+              {
+                  action: "block",
+                  label: "네",
+                  message: "네",
+                  blockId: "629780f4ab89e678ee86b2de"
+              },
+              {
+                  action: "block",
+                  label: "아니오",
+                  message: "아니오",
+                  blockId: "629780f4ab89e678ee86b2de"
               }
           ]
       }
