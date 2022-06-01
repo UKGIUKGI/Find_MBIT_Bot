@@ -112,7 +112,6 @@ apiRouter.post('/question16', (req, res) => {
     } else if (mesg == "어떤 기종샀어?") {
         mbti = 'T';
     }
-    console.log(mbti);
     userDB[userId][2] += mbti;
     console.log(userDB[userId]);
     const responseBody = {
@@ -153,7 +152,6 @@ apiRouter.post('/question17', (req, res) => {
     } else if (mesg == "아니오") {
         mbti = 'P';
     }
-    console.log(mbti);
     userDB[userId][3] += mbti;
     console.log(userDB[userId]);
     const responseBody = {
@@ -194,7 +192,6 @@ apiRouter.post('/question18', (req, res) => {
     } else if (mesg == "아니오") {
         mbti = 'E';
     }
-    console.log(mbti);
     userDB[userId][0] += mbti;
     console.log(userDB[userId]);
     const responseBody = {
@@ -235,7 +232,6 @@ apiRouter.post('/question19', (req, res) => {
     } else if (mesg == "아니오") {
         mbti = 'S';
     }
-    console.log(mbti);
     userDB[userId][1] += mbti;
     console.log(userDB[userId]);
     const responseBody = {
@@ -267,6 +263,45 @@ apiRouter.post('/question19', (req, res) => {
     res.status(200).send(responseBody);
 });
 
+apiRouter.post('/question20', (req, res) => {
+    var userId = req.body.userRequest.user.id;
+    var mesg = req.body.userRequest.utterance;
+    var mbti = ''; 
+    if (mesg == "요즘 취업 어렵지 힘들겠다ㅠㅠ") {
+        mbti = 'F';
+    } else if (mesg == "무슨 준비하고있어? 이력서는 넣어봤어?") {
+        mbti = 'T';
+    }
+    userDB[userId][2] += mbti;
+    console.log(userDB[userId]);
+    const responseBody = {
+        version: "2.0",
+        template: {
+            outputs: [
+                {
+                    simpleText: {
+                        text: '[Question 20/20]\n마지막 여행지를 향해 가던 중 흥미로운 장소를 발견했을 때, 남은 일정을 고려하는 편이다.'
+                    }
+                }
+            ],
+            quickReplies: [
+                {
+                    action: "block",
+                    label: "네",
+                    message: "네",
+                    blockId: "6293885b7bd2fd4333583df0"
+                },
+                {
+                    action: "block",
+                    label: "아니오",
+                    message: "아니오",
+                    blockId: "6293885b7bd2fd4333583df0"
+                }
+            ]
+        }
+    }
+    res.status(200).send(responseBody);
+});
 
 apiRouter.post('/result', (req, res) => {
     var userId = req.body.userRequest.user.id;
@@ -278,7 +313,8 @@ apiRouter.post('/result', (req, res) => {
   } else if (mesg == "아니오") {
       mbti = 'P';
   }
-
+  userDB[userId][3] += mbti;
+  console.log(userDB[userId]);
   const responseBody = {
       version: "2.0",
       template: {
