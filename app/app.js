@@ -283,6 +283,47 @@ apiRouter.post('/question13', (req, res) => {
   res.status(200).send(responseBody);
 });
 
+apiRouter.post('/question14', (req, res) => {
+  var mesg = req.body.userRequest.utterance;
+  var userId = req.body.userRequest.user.id;
+  var mbti = '';
+  if (mesg == "네"){
+    mbti = 'I';
+  }
+  else if (mesg == "아니오") {
+    mbti = 'E';
+  }
+  userDB[userId][0] += mbti;
+  console.log(userDB);
+  const responseBody = {
+      version: "2.0",
+      template: {
+          outputs: [
+              {
+                  simpleText: {
+                      text: '[question14]\n공부하기 싫을 때 공부는 왜 해야 하는 것인지 고민에 빠질 때가 있습니다.'
+                  }
+              }
+          ],
+          quickReplies: [
+              {
+                  action: "block",
+                  label: "네",
+                  message: "네",
+                  blockId: "62979c9ce7a0253c7662ccd4"
+              },
+              {
+                  action: "block",
+                  label: "아니오",
+                  message: "아니오",
+                  blockId: "62979c9ce7a0253c7662ccd4"
+              }
+          ]
+      }
+  }
+  res.status(200).send(responseBody);
+});
+
 app.listen((process.env.PORT || 3000), function() {
   console.log('Example skill server listening on port 3000!');
 });
