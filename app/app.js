@@ -73,8 +73,7 @@ apiRouter.post('/test', (req, res) => {
 
 apiRouter.post('/question15', (req, res) => {
     var userId = req.body.userRequest.user.id;
-    var mesg = req.body.userRequest;
-    userDB[userId] = ['','','','',''];//new Array(5);
+    userDB[userId] = ['','','','',''];
     const responseBody = {
         version: "2.0",
         template: {
@@ -106,13 +105,16 @@ apiRouter.post('/question15', (req, res) => {
 
 apiRouter.post('/question16', (req, res) => {
     var userId = req.body.userRequest.user.id;
-    var mesg = req.body.userRequest;
+    var mesg = req.body.userRequest.utterance;
     var mbti = ''; 
     if (mesg == "왜ㅠㅠ무슨일 있었어?") {
         mbti = 'F';
     } else if (mesg == "어떤 기종샀어?") {
         mbti = 'T';
     }
+    console.log(mbti);
+    userDB[userId][2] += mbti;
+    console.log(userDB[userId]);
     const responseBody = {
         version: "2.0",
         template: {
@@ -144,13 +146,16 @@ apiRouter.post('/question16', (req, res) => {
 
 apiRouter.post('/question17', (req, res) => {
     var userId = req.body.userRequest.user.id;
-    var mesg = req.body.userRequest;
+    var mesg = req.body.userRequest.utterance;
     var mbti = ''; 
     if (mesg == "네") {
         mbti = 'J';
     } else if (mesg == "아니오") {
         mbti = 'P';
     }
+    console.log(mbti);
+    userDB[userId][3] += mbti;
+    console.log(userDB[userId]);
     const responseBody = {
         version: "2.0",
         template: {
@@ -182,13 +187,16 @@ apiRouter.post('/question17', (req, res) => {
 
 apiRouter.post('/question18', (req, res) => {
     var userId = req.body.userRequest.user.id;
-    var mesg = req.body.userRequest;
+    var mesg = req.body.userRequest.utterance;
     var mbti = ''; 
     if (mesg == "네") {
         mbti = 'I';
     } else if (mesg == "아니오") {
         mbti = 'E';
     }
+    console.log(mbti);
+    userDB[userId][0] += mbti;
+    console.log(userDB[userId]);
     const responseBody = {
         version: "2.0",
         template: {
@@ -220,13 +228,16 @@ apiRouter.post('/question18', (req, res) => {
 
 apiRouter.post('/question19', (req, res) => {
     var userId = req.body.userRequest.user.id;
-    var mesg = req.body.userRequest;
+    var mesg = req.body.userRequest.utterance;
     var mbti = ''; 
     if (mesg == "네") {
         mbti = 'N';
     } else if (mesg == "아니오") {
         mbti = 'S';
     }
+    console.log(mbti);
+    userDB[userId][1] += mbti;
+    console.log(userDB[userId]);
     const responseBody = {
         version: "2.0",
         template: {
@@ -256,6 +267,7 @@ apiRouter.post('/question19', (req, res) => {
     res.status(200).send(responseBody);
 });
 
+
 apiRouter.post('/result', (req, res) => {
     var userId = req.body.userRequest.user.id;
   var mesg = req.body.userRequest.utterance;
@@ -266,8 +278,7 @@ apiRouter.post('/result', (req, res) => {
   } else if (mesg == "아니오") {
       mbti = 'P';
   }
-  userDB[userId] += mbti;
-  console.log(userDB[userId]);
+
   const responseBody = {
       version: "2.0",
       template: {
