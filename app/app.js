@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 
 const apiRouter = express.Router();
 
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
@@ -12,7 +13,14 @@ app.use(bodyParser.urlencoded({
 
 app.use('/api', apiRouter);
 
-let userDB = new Array();
+function createArray(rows, columns) {
+  var arr = new Array(rows);
+  for (var i = 0; i < rows; i++) {
+    arr[i] = new Array(columns);
+  }
+  return arr;
+}
+var userDB = createArray(5, 5);
 
 apiRouter.post('/sayHello', function(req, res) {
   const responseBody = {
@@ -41,34 +49,29 @@ apiRouter.post('/sayHello', function(req, res) {
   res.status(200).send(responseBody);
 });
 
-apiRouter.post('/question1', (req, res) => {
-    var userId = req.body.userRequest.user.id;
-  var mesg = req.body.userRequest;
-  console.log('[q1:user message] ', mesg);
-  userDB[userId] = '';
-  console.log(userDB[userId]);
+apiRouter.post('/test', (req, res) => {
   const responseBody = {
       version: "2.0",
       template: {
           outputs: [
               {
                   simpleText: {
-                      text: '사람들과 어울리는 것을 좋아하시나요?'
+                      text: 'MBTI 테스트 question8-14'
                   }
               }
           ],
           quickReplies: [
               {
                   action: "block",
-                  label: "네",
-                  message: "네",
-                  blockId: "628e8cb07bd2fd433357f878"
+                  label: "시작하기",
+                  message: "시작하기",
+                  blockId: "62977ff05ceed96c385449b9"
               },
               {
                   action: "block",
-                  label: "아니오",
-                  message: "아니오",
-                  blockId: "628e8cb07bd2fd433357f878"
+                  label: "나중에 하기",
+                  message: "나중에 하기",
+                  blockId: "6297861be7a0253c7662ccb8"
               }
           ]
       }
@@ -76,157 +79,31 @@ apiRouter.post('/question1', (req, res) => {
   res.status(200).send(responseBody);
 });
 
-apiRouter.post('/question2', (req, res) => {
-    var userId = req.body.userRequest.user.id;
-    var mesg = req.body.userRequest.utterance;
-    console.log('[q2:user message] ', mesg);
-    var mbti = ''; 
-    if (mesg == "네") {
-        mbti = 'E';
-    } else if (mesg == "아니오") {
-        mbti = 'I';
-    }
-    userDB[userId] += mbti;
-    console.log(userDB[userId]);
-    const responseBody = {
+apiRouter.post('/question8', (req, res) => {
+  const responseBody = {
       version: "2.0",
       template: {
           outputs: [
               {
                   simpleText: {
-                      text: '평소 깻잎논쟁에 1시간 이상을 생각해봤다.'
+                      text: '[question8]\n여행 계획을 어떻게 세우시나요?'
                   }
               }
           ],
           quickReplies: [
               {
                   action: "block",
-                  label: "네",
-                  message: "네",
-                  blockId: "628d239d93b31d5b60ab6c29"
+                  label: "테마만 정한다(ex.맛집 방문하는 날, 사진 찍는 날)",
+                  message: "테마만 정한다(ex.맛집 방문하는 날, 사진 찍는 날)",
+                  blockId: "629780e9e7a0253c7662cca6"
               },
               {
                   action: "block",
-                  label: "아니오",
-                  message: "아니오",
-                  blockId: "628d239d93b31d5b60ab6c29"
+                  label: "시간과 장소를 자세하게 정한다",
+                  message: "시간과 장소를 자세하게 정한다",
+                  blockId: "629780e9e7a0253c7662cca6"
               }
           ]
-      }
-  }
-  res.status(200).send(responseBody);
-});
-
-apiRouter.post('/question3', function(req, res) {
-    var userId = req.body.userRequest.user.id;
-    var mesg = req.body.userRequest.utterance;
-    console.log('[q3:user message] ', mesg);
-    var mbti = '';
-    if (mesg == '네') {
-        mbti = 'N';
-    } else if (mesg == '아니오') {
-        mbti = 'S';
-    }
-    userDB[userId] += mbti;
-    console.log(userDB[userId]);
-    const responseBody = {
-        version: "2.0",
-        template: {
-            outputs: [
-                {
-                    "simpleText": {
-                        "text": "다음과 같은 상황에서 어떻게 대답하겠습니까?\n 친구: 나 기분 안 좋아서 옷 샀어"
-                    }
-                }
-            ],
-            quickReplies: [
-                {
-                    action: "block",
-                    label: "왜 기분 안 좋아?",
-                    message: "왜 기분 안 좋아?",
-                    blockId: "6290630451c40d32c6d8e71f"
-                },
-                {
-                    action: "block",
-                    label: "무슨 옷 샀어?",
-                    message: "무슨 옷 샀어?",
-                    blockId: "6290630451c40d32c6d8e71f"
-                }
-            ]
-        }
-    };
-    res.status(200).send(responseBody);
-});
-
-apiRouter.post('/question4', (req, res) => {
-    var userId = req.body.userRequest.user.id;
-  var mesg = req.body.userRequest.utterance;
-  console.log('[q4:user message] ', mesg);
-  var mbti = ''; 
-  if (mesg == "왜 기분 안 좋아?") {
-      mbti = 'F';
-  } else if (mesg == "무슨 옷 샀어?") {
-      mbti = 'T';
-  }
-  userDB[userId] += mbti;
-  console.log(userDB[userId]);
-  const responseBody = {
-      version: "2.0",
-      template: {
-          outputs: [
-              {
-                  simpleText: {
-                      text: "그날 할 일에 대해 계획을 미리 세우시나요?"
-                  }
-              }
-          ],
-          quickReplies: [
-            {
-                action: "block",
-                label: "네",
-                message: "네",
-                blockId: "6293885b7bd2fd4333583df0"
-            },
-            {
-                action: "block",
-                label: "아니오",
-                message: "아니오",
-                blockId: "6293885b7bd2fd4333583df0"
-            }
-        ]
-      }
-  }
-  res.status(200).send(responseBody);
-});
-
-apiRouter.post('/result', (req, res) => {
-    var userId = req.body.userRequest.user.id;
-  var mesg = req.body.userRequest.utterance;
-  console.log('[result:user message] ', mesg);
-  var mbti = ''; 
-  if (mesg == "네") {
-      mbti = 'J';
-  } else if (mesg == "아니오") {
-      mbti = 'P';
-  }
-  userDB[userId] += mbti;
-  console.log(userDB[userId]);
-  const responseBody = {
-      version: "2.0",
-      template: {
-          outputs: [
-              {
-                  simpleText: {
-                      text: "당신의 MBTI는 : "+userDB[userId]
-                  }
-              }
-          ],
-          quickReplies: [{
-              action: "block",
-              label: "MBTI 테스트 다시하기",
-              message: "MBTI 테스트 다시하기",
-              blockId : "628b8005055a574d7df54466"
-          }]
       }
   }
   res.status(200).send(responseBody);
