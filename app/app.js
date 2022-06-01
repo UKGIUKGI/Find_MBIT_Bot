@@ -322,6 +322,178 @@ apiRouter.post('/question7', (req, res) => {
   res.status(200).send(responseBody);
 });
 
+apiRouter.post('/result', (req, res) => {
+    var userId = req.body.userRequest.user.id;
+  var mesg = req.body.userRequest.utterance;
+  console.log('[result:user message] ', mesg);
+  var mbti = ''; 
+  if (mesg == "네") {
+      mbti = 'T';
+  } else if (mesg == "아니오") {
+      mbti = 'F';
+  }
+  userDB[userId][2] += mbti;
+  console.log(userDB[userId]);
+  result(userDB[userId]);
+  const responseBody = {
+      version: "2.0",
+      template: {
+          outputs: [
+              {
+                  simpleText: {
+                      text: "당신의 MBTI는 : "+userDB[userId][4]
+                  }
+              }
+          ],
+          quickReplies: [{
+              action: "block",
+              label: "MBTI 테스트 다시하기",
+              message: "MBTI 테스트 다시하기",
+              blockId : "6297b10d5ceed96c38544a06"
+          },
+          {
+              action: "block",
+              label: "자세한 결과 보기",
+              message: "자세한 결과 보기",
+              blockId: "6297bc58ab89e678ee86b33a"
+          }]
+      }
+  }
+  res.status(200).send(responseBody);
+});
+
+apiRouter.post('/detail', (req, res) => {
+    var userId = req.body.userRequest.user.id;
+    var mesg = req.body.userRequest.utterance;
+    var E=0;
+    var I=0;
+    var N=0;
+    var S=0;
+    var F=0;
+    var T=0;
+    var P=0;
+    var J=0;
+
+    for(let j=0;j<4;j++){
+        for(let i=0; i<3; i++){
+            if(j==0){
+                if(userDB[userId][j][i]=="E"){
+                    E++;
+                }
+                else{
+                    I++;
+                }
+            }
+            else if(j==1){
+                if(userDB[userId][j][i]=="N"){
+                    N++;
+                }
+                else{
+                    S++;
+                }
+            }
+            else if(j==2){
+                if(userDB[userId][j][i]=="F"){
+                    F++;
+                }
+                else{
+                    T++;
+                }
+            }
+            else if(j==3){
+                if(userDB[userId][j][i]=="N"){
+                    P++;
+                }
+                else{
+                    J++;
+                }
+            }
+        }
+    }
+  
+  const responseBody = {
+      version: "2.0",
+      template: {
+          outputs: [
+              {
+                  simpleText: {
+                    text: "E와 I의 비율\nE : "+(E/(E+I)*100)+"%\nI : "+(I/(E+I)*100)+"\nN와 S의 비율\nN : "+(N/(N+S)*100)+"%\nS : "+(S/(N+S)*100)+"\nF와 T의 비율\nF : "+(F/(F+T)*100)+"%\nT : "+(T/(F+T)*100)+"\nJ와 P의 비율\nJ : "+(J/(J+P)*100)+"%\nP : "+(P/(J+P)*100)
+                  }
+              }
+          ]
+      }
+  }
+  res.status(200).send(responseBody);
+});
+
+function result(Array){
+    var E=0;
+    var I=0;
+    var N=0;
+    var S=0;
+    var F=0;
+    var T=0;
+    var P=0;
+    var J=0;
+
+    for(let j=0;j<4;j++){
+        for(let i=0; i<3; i++){
+            if(j==0){
+                if(Array[j][i]=="E"){
+                    E++;
+                }
+                else{
+                    I++;
+                }
+            }
+            else if(j==1){
+                if(Array[j][i]=="N"){
+                    N++;
+                }
+                else{
+                    S++;
+                }
+            }
+            else if(j==2){
+                if(Array[j][i]=="F"){
+                    F++;
+                }
+                else{
+                    T++;
+                }
+            }
+            else if(j==3){
+                if(Array[j][i]=="N"){
+                    P++;
+                }
+                else{
+                    J++;
+                }
+            }
+        }
+    }
+
+    if(E>I)
+    Array[4]+='E';
+    else
+    Array[4]+='I';
+
+    if(N>S)
+    Array[4]+='N';
+    else
+    Array[4]+='S';
+
+    if(F>T)
+    Array[4]+='F';
+    else
+    Array[4]+='T';
+
+    if(P>J)
+    Array[4]+='P';
+    else
+    Array[4]+='J';
+}
+
 app.listen((process.env.PORT || 3000), function() {
   console.log('Example skill server listening on port 3000!');
 });
