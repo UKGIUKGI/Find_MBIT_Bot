@@ -119,6 +119,47 @@ apiRouter.post('/question9', (req, res) => {
   res.status(200).send(responseBody);
 });
 
+apiRouter.post('/question10', (req, res) => {
+  var mesg = req.body.userRequest.utterance;
+  var userId = req.body.userRequest.user.id;
+  var mbti = '';
+  if (mesg == "네"){
+    mbti = 'I';
+  }
+  else if (mesg == "아니오") {
+    mbti = 'E';
+  }
+  userDB[userId][0] += mbti;
+  console.log(userDB);
+  const responseBody = {
+      version: "2.0",
+      template: {
+          outputs: [
+              {
+                  simpleText: {
+                      text: '[question10]\n본인이 창의적이기보다 현실적인 사람이라고 생각합니다.'
+                  }
+              }
+          ],
+          quickReplies: [
+              {
+                  action: "block",
+                  label: "네",
+                  message: "네",
+                  blockId: "629781015ceed96c385449c8"
+              },
+              {
+                  action: "block",
+                  label: "아니오",
+                  message: "아니오",
+                  blockId: "629781015ceed96c385449c8"
+              }
+          ]
+      }
+  }
+  res.status(200).send(responseBody);
+});
+
 app.listen((process.env.PORT || 3000), function() {
   console.log('Example skill server listening on port 3000!');
 });
