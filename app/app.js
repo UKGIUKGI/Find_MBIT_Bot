@@ -305,36 +305,78 @@ apiRouter.post('/question20', (req, res) => {
 
 apiRouter.post('/result', (req, res) => {
     var userId = req.body.userRequest.user.id;
-  var mesg = req.body.userRequest.utterance;
-  console.log('[result:user message] ', mesg);
-  var mbti = ''; 
-  if (mesg == "네") {
-      mbti = 'J';
-  } else if (mesg == "아니오") {
-      mbti = 'P';
-  }
-  userDB[userId][3] += mbti;
-  console.log(userDB[userId]);
-  const responseBody = {
-      version: "2.0",
-      template: {
-          outputs: [
-              {
-                  simpleText: {
-                      text: "당신의 MBTI는 : "+userDB[userId]
-                  }
-              }
-          ],
-          quickReplies: [{
-              action: "block",
-              label: "MBTI 테스트 다시하기",
-              message: "MBTI 테스트 다시하기",
-              blockId : "628b7ef293b31d5b60ab4b29" //to question 1
-          }]
-      }
-  }
-  res.status(200).send(responseBody);
+    var mesg = req.body.userRequest.utterance;
+    var mbti = ''; 
+    if (mesg == "네") {
+        mbti = 'J';
+    } else if (mesg == "아니오") {
+        mbti = 'P';
+    }
+    userDB[userId][3] += mbti;
+    console.log(userDB[userId]);
+    analysis_mbti(userDB[userId]);
+    const responseBody = {
+        version: "2.0",
+        template: {
+            outputs: [
+                {
+                    simpleText: {
+                        text: "당신의 MBTI는 : "+userDB[userId][4]
+
+                    }
+                }
+            ],
+            quickReplies: [{
+                action: "block",
+                label: "MBTI 테스트 다시하기",
+                message: "MBTI 테스트 다시하기",
+                blockId : "628b7ef293b31d5b60ab4b29" //to question 1
+            }]
+        }
+    }
+    res.status(200).send(responseBody);
 });
+
+function analysis_mbti(userdb) {
+    var e = count_mbti(userdb[0], 'E');
+    var i = 1-e; //-> 5
+    var n = count_mbti(userdb[1], 'N');
+    var s = 1-n; //-> 5
+    var f = count_mbti(userdb[2], 'F');
+    var t = 2-f; //-> 5
+    var j = count_mbti(userdb[3], 'J');
+    var p = 2-j; //-> 5
+    if (e > i) {
+        userdb[4] += 'E';
+    } else {
+        userdb[4] += 'I';
+    }
+    if (n > s) {
+        userdb[4] += 'N';
+    } else {
+        userdb[4] += 'S';
+    }
+    if (f > t) {
+        userdb[4] += 'F';
+    } else {
+        userdb[4] += 'T';
+    }
+    if (j > p) {
+        userdb[4] += 'J';
+    } else {
+        userdb[4] += 'P';
+    }
+}
+
+function count_mbti(item_list, mbti_ch) {
+    var result = 0;
+    for (var i=0; i<5; i++) {
+        if(item_list[i] == 'mbti_ch'){
+            result += 1;
+        }
+    }
+    return result;
+}
 
 app.listen((process.env.PORT || 3000), function() {
   console.log('Example skill server listening on port 3000!');
