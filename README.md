@@ -9,20 +9,12 @@
 </div>
 
 
-
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-    </li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ol>
-</details>
-
+## Table of Contents
+1. [About The Project](#about-the-project)
+2. [Built With](#built-with)
+3. [Roadmap](#roadmap)
+4. [Contributing](#contributing)
+5. [Contact](#contact)
 
 
 <!-- ABOUT THE PROJECT -->
@@ -37,9 +29,11 @@
 
 
 
-### Built With
+## Built With
 
 * [Node.js](https://nodejs.org/ko/)
+* [Express](https://expressjs.com/ko/)
+* [Javascript](https://developer.mozilla.org/ko/docs/Web/JavaScript)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -81,5 +75,3 @@
 * Project Link : http://khuhub.khu.ac.kr/2018103692/find_mbti_bot)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-
