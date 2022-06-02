@@ -68,7 +68,7 @@
 <img src="channel.jpg" width="270px" height="450px"></img><br/>
 
 * 채팅창에 "안녕"을 입력하면 챗봇이 메시지를 전송합니다.
-<img src="channel.jpg" width="300px" height="300px"></img><br/>
+<img src="hello.jpg" width="300px" height="300px"></img><br/>
 
 * 전송된 메시지에서 "MBTI 테스트 시작하기" 버튼을 터치하면 MBTI 테스트를 진행할 수 있습니다.
 
