@@ -14,6 +14,7 @@ app.use(bodyParser.urlencoded({
 app.use('/api', apiRouter);
 
 let userDB = new Array();
+let mbtiper = new Array();
 
 apiRouter.post('/test', (req, res) => {
   const responseBody = {
@@ -324,6 +325,107 @@ apiRouter.post('/question14', (req, res) => {
   res.status(200).send(responseBody);
 });
 
+apiRouter.post('/result', (req, res) => {
+    var mesg = req.body.userRequest.utterance;
+    var userId = req.body.userRequest.user.id;
+    var mbti = '';
+    if (mesg == "네"){
+      mbti = 'N';
+    }
+    else if (mesg == "아니오") {
+      mbti = 'S';
+    }
+    userDB[userId][1] += mbti;
+    console.log(userDB[userId]);
+    console.log(mbtiper);
+    var e = calc(userDB[userId], 'E');
+    var i = 2-e;
+    var n = calc(userDB[userId], 'N');
+    var s = 2-n;
+    var f = calc(userDB[userId], 'F');
+    var t = 1-f;
+    var j = calc(userDB[userId], 'J');
+    var p = 2-j;
+    mbtiper.push(20 * e);
+    mbtiper.push(20 * i);
+    mbtiper.push(20 * n);
+    mbtiper.push(20 * s);
+    mbtiper.push(20 * f);
+    mbtiper.push(20 * t);
+    mbtiper.push(20 * j);
+    mbtiper.push(20 * p);
+        if(mbtiper[0]>mbtiper[1]){
+            userDB[userId][4] += 'E';
+        } else {
+            userDB[userId][4] += 'I';
+        }
+        if(mbtiper[2]>mbtiper[3]){
+            userDB[userId][4] += 'N';
+        } else {
+            userDB[userId][4] += 'S';
+        }
+        if(mbtiper[4]>mbtiper[5]){
+            userDB[userId][4] += 'T';
+        } else {
+            userDB[userId][4] += 'F';
+        }
+        if(mbtiper[6]>mbtiper[7]){
+            userDB[userId][4] += 'J';
+        } else {
+            userDB[userId][4] += 'P';
+        }
+    const responseBody = {
+        version: "2.0",
+        template: {
+            outputs: [
+                {
+                    simpleText: {
+                        text: "당신의 MBTI는 : "+userDB[userId][4]
+                    }
+                }
+            ],
+            quickReplies: [{
+                action: "block",
+                label: "MBTI 테스트 다시하기",
+                message: "MBTI 테스트 다시하기",
+                blockId : "62977ff05ceed96c385449b9"
+            },
+            {
+                action: "block",
+                label: "결과 상세보기",
+                message: "결과 상세보기",
+                blockId: "62987b78e7a0253c7662dcd9"
+            }]
+        }
+    }
+    res.status(200).send(responseBody);
+  });
+
+  function calc(array, mbti_cap) {
+    var result = 0;
+    for (var k = 0; k < 5; k++) {
+        if(array[k] == 'mbti_cap') {
+            result += 1;
+        }
+    }
+    return result;
+}
+
+apiRouter.post('/percent', (req, res) => {
+    const responseBody = {
+        version: "2.0",
+        template: {
+            outputs: [
+                {
+                    simpleText: {
+                        text: 'E: '+mbtiper[0]+'%\nI: '+mbtiper[1]+'%\nN: '+mbtiper[2]+'%\nS: '+mbtiper[3]+'%\nT: '+mbtiper[4]+'%\nF: '+mbtiper[5]+'%\nJ: '+mbtiper[6]+'%\nP: '+mbtiper[7]+'%'
+                    }
+                }
+            ]
+        }
+    }
+    res.status(200).send(responseBody);
+  });
 app.listen((process.env.PORT || 3000), function() {
   console.log('Example skill server listening on port 3000!');
 });
