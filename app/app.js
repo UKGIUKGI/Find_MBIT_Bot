@@ -201,7 +201,7 @@ apiRouter.post('/question4', (req, res) => {
 
 apiRouter.post('/question5', (req, res) => {
     var userId = req.body.userRequest.user.id;
-  var mesg = req.body.userRequest;
+  var mesg = req.body.userRequest.utterance;
   console.log('[q1:user message] ', mesg);
   var mbti = ''; 
     if (mesg == "네") {
@@ -332,7 +332,7 @@ apiRouter.post('/question8', (req, res) => {
     } else if (mesg == "아니오") {
         mbti = 'F';
     }
-    userDB[userId][1] += mbti;
+    userDB[userId][2] += mbti;
     console.log(userDB[userId]);
     const responseBody = {
         version: "2.0",
@@ -374,7 +374,7 @@ apiRouter.post('/question8', (req, res) => {
       mbti = 'J';
     }
     userDB[userId][3] += mbti;
-    console.log(userDB);
+    console.log(userDB[userId]);
     const responseBody = {
         version: "2.0",
         template: {
@@ -415,7 +415,7 @@ apiRouter.post('/question8', (req, res) => {
       mbti = 'E';
     }
     userDB[userId][0] += mbti;
-    console.log(userDB);
+    console.log(userDB[userId]);
     const responseBody = {
         version: "2.0",
         template: {
@@ -456,7 +456,7 @@ apiRouter.post('/question8', (req, res) => {
       mbti = 'N';
     }
     userDB[userId][1] += mbti;
-    console.log(userDB);
+    console.log(userDB[userId]);
     const responseBody = {
         version: "2.0",
         template: {
@@ -497,7 +497,7 @@ apiRouter.post('/question8', (req, res) => {
       mbti = 'T';
     }
     userDB[userId][2] += mbti;
-    console.log(userDB);
+    console.log(userDB[userId]);
     const responseBody = {
         version: "2.0",
         template: {
@@ -538,7 +538,7 @@ apiRouter.post('/question8', (req, res) => {
       mbti = 'P';
     }
     userDB[userId][3] += mbti;
-    console.log(userDB);
+    console.log(userDB[userId]);
     const responseBody = {
         version: "2.0",
         template: {
@@ -579,7 +579,7 @@ apiRouter.post('/question8', (req, res) => {
       mbti = 'E';
     }
     userDB[userId][0] += mbti;
-    console.log(userDB);
+    console.log(userDB[userId]);
     const responseBody = {
         version: "2.0",
         template: {
@@ -619,8 +619,8 @@ apiRouter.post('/question8', (req, res) => {
     else if (mesg == "아니오") {
       mbti = 'S';
     }
-    userDB[userId][0] += mbti;
-    console.log(userDB);
+    userDB[userId][1] += mbti;
+    console.log(userDB[userId]);
     const responseBody = {
         version: "2.0",
         template: {
@@ -861,8 +861,8 @@ apiRouter.post('/result', (req, res) => {
     }
     userDB[userId][3] += mbti;
     console.log(userDB[userId]);
-  analysis_mbti(userDB[userId]);
-  const responseBody = {
+    analysis_mbti(userDB[userId]);
+    const responseBody = {
       version: "2.0",
       template: {
           outputs: [
@@ -988,7 +988,7 @@ function analysis_mbti(userdb) {
 function count_mbti(item_list, mbti_ch) {
     var result = 0;
     for (var i=0; i<5; i++) {
-        if(item_list[i] == 'mbti_ch'){
+        if(item_list[i] == mbti_ch){
             result += 1;
         }
     }
