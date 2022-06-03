@@ -328,6 +328,7 @@ apiRouter.post('/question14', (req, res) => {
 apiRouter.post('/result', (req, res) => {
     var mesg = req.body.userRequest.utterance;
     var userId = req.body.userRequest.user.id;
+    mbtiper = ['','','','','','','',''];
     var mbti = '';
     if (mesg == "네"){
       mbti = 'N';
@@ -336,24 +337,42 @@ apiRouter.post('/result', (req, res) => {
       mbti = 'S';
     }
     userDB[userId][1] += mbti;
-    console.log(userDB[userId]);
-    console.log(mbtiper);
-    var e = calc(userDB[userId], 'E');
+    var e = 0;
+    var n = 0;
+    var f = 0;
+    var j = 0;
+    for(i=0; i<2; i++){
+        if(userDB[userId][0][i] == "E"){
+            e++;
+        }
+    }
+    for(i=0; i<2; i++){
+        if(userDB[userId][1][i] == "N"){
+            n++;
+        }
+    }
+    for(i=0; i<1; i++){
+        if(userDB[userId][2][i] == "F"){
+            f++;
+        }
+    }
+    for(i=0; i<2; i++){
+        if(userDB[userId][3][i] == "J"){
+            j++;
+        }
+    }
     var i = 2-e;
-    var n = calc(userDB[userId], 'N');
     var s = 2-n;
-    var f = calc(userDB[userId], 'F');
     var t = 1-f;
-    var j = calc(userDB[userId], 'J');
     var p = 2-j;
-    mbtiper.push(20 * e);
-    mbtiper.push(20 * i);
-    mbtiper.push(20 * n);
-    mbtiper.push(20 * s);
-    mbtiper.push(20 * f);
-    mbtiper.push(20 * t);
-    mbtiper.push(20 * j);
-    mbtiper.push(20 * p);
+    mbtiper[0] += 20 * e;
+    mbtiper[1] += 20 * i;
+    mbtiper[2] += 20 * n;
+    mbtiper[3] += 20 * s;
+    mbtiper[4] += 20 * t;
+    mbtiper[5] += 20 * f;
+    mbtiper[6] += 20 * j;
+    mbtiper[7] += 20 * p;
         if(mbtiper[0]>mbtiper[1]){
             userDB[userId][4] += 'E';
         } else {
@@ -400,16 +419,6 @@ apiRouter.post('/result', (req, res) => {
     }
     res.status(200).send(responseBody);
   });
-
-  function calc(array, mbti_cap) {
-    var result = 0;
-    for (var k = 0; k < 5; k++) {
-        if(array[k] == 'mbti_cap') {
-            result += 1;
-        }
-    }
-    return result;
-}
 
 apiRouter.post('/percent', (req, res) => {
     const responseBody = {
