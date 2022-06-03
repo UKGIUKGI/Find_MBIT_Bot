@@ -902,7 +902,7 @@ apiRouter.post('/detail', (req, res) => {
     var J=0;
 
     for(let j=0;j<4;j++){
-        for(let i=0; i<3; i++){
+        for(let i=0; i<5; i++){
             if(j==0){
                 if(userDB[userId][j][i]=="E"){
                     E++;
@@ -944,7 +944,7 @@ apiRouter.post('/detail', (req, res) => {
           outputs: [
               {
                   simpleText: {
-                    text: "E와 I의 비율\nE : "+(E/(E+I)*100)+"%\nI : "+(I/(E+I)*100)+"\nN와 S의 비율\nN : "+(N/(N+S)*100)+"%\nS : "+(S/(N+S)*100)+"\nF와 T의 비율\nF : "+(F/(F+T)*100)+"%\nT : "+(T/(F+T)*100)+"\nJ와 P의 비율\nJ : "+(J/(J+P)*100)+"%\nP : "+(P/(J+P)*100)
+                    text: "E와 I의 비율\nE : "+(E/(E+I)*100.0)+"%\nI : "+(I/(E+I)*100.0)+"%\nN와 S의 비율\nN : "+(N/(N+S)*100.0)+"%\nS : "+(S/(N+S)*100.0)+"%\nF와 T의 비율\nF : "+(F/(F+T)*100.0)+"%\nT : "+(T/(F+T)*100.0)+"%\nJ와 P의 비율\nJ : "+(J/(J+P)*100.0)+"%\nP : "+(P/(J+P)*100.0)+"%"
                   }
               }
           ]
