@@ -41,36 +41,6 @@ apiRouter.post('/sayHello', function(req, res) {
   res.status(200).send(responseBody);
 });
 
-apiRouter.post('/test', (req, res) => {
-    const responseBody = {
-        version: "2.0",
-        template: {
-            outputs: [
-                {
-                    simpleText: {
-                        text: '재밌는 MBTI 테스트'
-                    }
-                }
-            ],
-            quickReplies: [
-                {
-                    action: "block",
-                    label: "할래!",
-                    message: "할래!",
-                    blockId: "6294c3ecf591aa1905548230"
-                },
-                {
-                    action: "block",
-                    label: "안 할래",
-                    message: "안 할래",
-                    blockId: "628b7ef293b31d5b60ab4b29"
-                }
-            ]
-        }
-    }
-    res.status(200).send(responseBody);
-});
-
 apiRouter.post('/question1', (req, res) => {
     var userId = req.body.userRequest.user.id;
   var mesg = req.body.userRequest;
@@ -338,13 +308,13 @@ apiRouter.post('/question7', (req, res) => {
                   action: "block",
                   label: "네",
                   message: "네",
-                  blockId: "6297b3505ceed96c38544a0a"
+                  blockId: "62977ff05ceed96c385449b9"
               },
               {
                   action: "block",
                   label: "아니오",
                   message: "아니오",
-                  blockId: "6297b3505ceed96c38544a0a"
+                  blockId: "62977ff05ceed96c385449b9"
               }
           ]
       }
@@ -354,8 +324,16 @@ apiRouter.post('/question7', (req, res) => {
 
 apiRouter.post('/question8', (req, res) => {
     var userId = req.body.userRequest.user.id;
-    userDB[userId] = ['','','','',''];
-    console.log(userDB);
+    var mesg = req.body.userRequest.utterance;
+    console.log('[q2:user message] ', mesg);
+    var mbti = ''; 
+    if (mesg == "네") {
+        mbti = 'T';
+    } else if (mesg == "아니오") {
+        mbti = 'F';
+    }
+    userDB[userId][1] += mbti;
+    console.log(userDB[userId]);
     const responseBody = {
         version: "2.0",
         template: {
@@ -617,13 +595,13 @@ apiRouter.post('/question8', (req, res) => {
                     action: "block",
                     label: "네",
                     message: "네",
-                    blockId: "62979c9ce7a0253c7662ccd4"
+                    blockId: "6294c3ecf591aa1905548230"
                 },
                 {
                     action: "block",
                     label: "아니오",
                     message: "아니오",
-                    blockId: "62979c9ce7a0253c7662ccd4"
+                    blockId: "6294c3ecf591aa1905548230"
                 }
             ]
         }
@@ -632,8 +610,17 @@ apiRouter.post('/question8', (req, res) => {
   });
 
   apiRouter.post('/question15', (req, res) => {
+    var mesg = req.body.userRequest.utterance;
     var userId = req.body.userRequest.user.id;
-    userDB[userId] = ['','','','',''];
+    var mbti = '';
+    if (mesg == "네"){
+      mbti = 'N';
+    }
+    else if (mesg == "아니오") {
+      mbti = 'S';
+    }
+    userDB[userId][0] += mbti;
+    console.log(userDB);
     const responseBody = {
         version: "2.0",
         template: {
@@ -865,17 +852,16 @@ apiRouter.post('/question20', (req, res) => {
 
 apiRouter.post('/result', (req, res) => {
     var userId = req.body.userRequest.user.id;
-  var mesg = req.body.userRequest.utterance;
-  console.log('[result:user message] ', mesg);
-  var mbti = ''; 
-  if (mesg == "네") {
-      mbti = 'T';
-  } else if (mesg == "아니오") {
-      mbti = 'F';
-  }
-  userDB[userId][2] += mbti;
-  console.log(userDB[userId]);
-  result(userDB[userId]);
+    var mesg = req.body.userRequest.utterance;
+    var mbti = ''; 
+    if (mesg == "네") {
+        mbti = 'J';
+    } else if (mesg == "아니오") {
+        mbti = 'P';
+    }
+    userDB[userId][3] += mbti;
+    console.log(userDB[userId]);
+  analysis_mbti(userDB[userId]);
   const responseBody = {
       version: "2.0",
       template: {
@@ -967,228 +953,16 @@ apiRouter.post('/detail', (req, res) => {
   res.status(200).send(responseBody);
 });
 
-function result(Array){
-    var E=0;
-    var I=0;
-    var N=0;
-    var S=0;
-    var F=0;
-    var T=0;
-    var P=0;
-    var J=0;
-
-    for(let j=0;j<4;j++){
-        for(let i=0; i<3; i++){
-            if(j==0){
-                if(Array[j][i]=="E"){
-                    E++;
-                }
-                else{
-                    I++;
-                }
-            }
-            else if(j==1){
-                if(Array[j][i]=="N"){
-                    N++;
-                }
-                else{
-                    S++;
-                }
-            }
-            else if(j==2){
-                if(Array[j][i]=="F"){
-                    F++;
-                }
-                else{
-                    T++;
-                }
-            }
-            else if(j==3){
-                if(Array[j][i]=="N"){
-                    P++;
-                }
-                else{
-                    J++;
-                }
-            }
-        }
-    }
-
-    if(E>I)
-    Array[4]+='E';
-    else
-    Array[4]+='I';
-
-    if(N>S)
-    Array[4]+='N';
-    else
-    Array[4]+='S';
-
-    if(F>T)
-    Array[4]+='F';
-    else
-    Array[4]+='T';
-
-    if(P>J)
-    Array[4]+='P';
-    else
-    Array[4]+='J';
-}
-
-apiRouter.post('/result', (req, res) => {
-    var mesg = req.body.userRequest.utterance;
-    var userId = req.body.userRequest.user.id;
-    mbtiper = ['','','','','','','',''];
-    var mbti = '';
-    if (mesg == "네"){
-      mbti = 'N';
-    }
-    else if (mesg == "아니오") {
-      mbti = 'S';
-    }
-    userDB[userId][1] += mbti;
-    var e = 0;
-    var n = 0;
-    var f = 0;
-    var j = 0;
-    for(i=0; i<2; i++){
-        if(userDB[userId][0][i] == "E"){
-            e++;
-        }
-    }
-    for(i=0; i<2; i++){
-        if(userDB[userId][1][i] == "N"){
-            n++;
-        }
-    }
-    for(i=0; i<1; i++){
-        if(userDB[userId][2][i] == "F"){
-            f++;
-        }
-    }
-    for(i=0; i<2; i++){
-        if(userDB[userId][3][i] == "J"){
-            j++;
-        }
-    }
-    var i = 2-e;
-    var s = 2-n;
-    var t = 1-f;
-    var p = 2-j;
-    mbtiper[0] += 20 * e;
-    mbtiper[1] += 20 * i;
-    mbtiper[2] += 20 * n;
-    mbtiper[3] += 20 * s;
-    mbtiper[4] += 20 * t;
-    mbtiper[5] += 20 * f;
-    mbtiper[6] += 20 * j;
-    mbtiper[7] += 20 * p;
-        if(mbtiper[0]>mbtiper[1]){
-            userDB[userId][4] += 'E';
-        } else {
-            userDB[userId][4] += 'I';
-        }
-        if(mbtiper[2]>mbtiper[3]){
-            userDB[userId][4] += 'N';
-        } else {
-            userDB[userId][4] += 'S';
-        }
-        if(mbtiper[4]>mbtiper[5]){
-            userDB[userId][4] += 'T';
-        } else {
-            userDB[userId][4] += 'F';
-        }
-        if(mbtiper[6]>mbtiper[7]){
-            userDB[userId][4] += 'J';
-        } else {
-            userDB[userId][4] += 'P';
-        }
-    const responseBody = {
-        version: "2.0",
-        template: {
-            outputs: [
-                {
-                    simpleText: {
-                        text: "당신의 MBTI는 : "+userDB[userId][4]
-                    }
-                }
-            ],
-            quickReplies: [{
-                action: "block",
-                label: "MBTI 테스트 다시하기",
-                message: "MBTI 테스트 다시하기",
-                blockId : "62977ff05ceed96c385449b9"
-            },
-            {
-                action: "block",
-                label: "결과 상세보기",
-                message: "결과 상세보기",
-                blockId: "62987b78e7a0253c7662dcd9"
-            }]
-        }
-    }
-    res.status(200).send(responseBody);
-  });
-
-apiRouter.post('/percent', (req, res) => {
-    const responseBody = {
-        version: "2.0",
-        template: {
-            outputs: [
-                {
-                    simpleText: {
-                        text: 'E: '+mbtiper[0]+'%\nI: '+mbtiper[1]+'%\nN: '+mbtiper[2]+'%\nS: '+mbtiper[3]+'%\nT: '+mbtiper[4]+'%\nF: '+mbtiper[5]+'%\nJ: '+mbtiper[6]+'%\nP: '+mbtiper[7]+'%'
-                    }
-                }
-            ]
-        }
-    }
-    res.status(200).send(responseBody);
-  });
-
-apiRouter.post('/result', (req, res) => {
-    var userId = req.body.userRequest.user.id;
-    var mesg = req.body.userRequest.utterance;
-    var mbti = ''; 
-    if (mesg == "네") {
-        mbti = 'J';
-    } else if (mesg == "아니오") {
-        mbti = 'P';
-    }
-    userDB[userId][3] += mbti;
-    console.log(userDB[userId]);
-    analysis_mbti(userDB[userId]);
-    const responseBody = {
-        version: "2.0",
-        template: {
-            outputs: [
-                {
-                    simpleText: {
-                        text: "당신의 MBTI는 : "+userDB[userId][4]
-
-                    }
-                }
-            ],
-            quickReplies: [{
-                action: "block",
-                label: "MBTI 테스트 다시하기",
-                message: "MBTI 테스트 다시하기",
-                blockId : "628b7ef293b31d5b60ab4b29" //to question 1
-            }]
-        }
-    }
-    res.status(200).send(responseBody);
-});
 
 function analysis_mbti(userdb) {
     var e = count_mbti(userdb[0], 'E');
-    var i = 1-e; //-> 5
+    var i = 5-e; 
     var n = count_mbti(userdb[1], 'N');
-    var s = 1-n; //-> 5
+    var s = 5-n;
     var f = count_mbti(userdb[2], 'F');
-    var t = 2-f; //-> 5
+    var t = 5-f;
     var j = count_mbti(userdb[3], 'J');
-    var p = 2-j; //-> 5
+    var p = 5-j;
     if (e > i) {
         userdb[4] += 'E';
     } else {
