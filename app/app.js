@@ -14,37 +14,7 @@ app.use(bodyParser.urlencoded({
 app.use('/api', apiRouter);
 
 let userDB = new Array();
-let mbtiper = new Array();
 
-apiRouter.post('/test', (req, res) => {
-  const responseBody = {
-      version: "2.0",
-      template: {
-          outputs: [
-              {
-                  simpleText: {
-                      text: 'MBTI 테스트 question8-14\n시작하려면 시작하기 버튼을 눌러주세요!'
-                  }
-              }
-          ],
-          quickReplies: [
-              {
-                  action: "block",
-                  label: "시작하기",
-                  message: "시작하기",
-                  blockId: "62977ff05ceed96c385449b9"
-              },
-              {
-                  action: "block",
-                  label: "나중에 하기",
-                  message: "나중에 하기",
-                  blockId: "6297861be7a0253c7662ccb8"
-              }
-          ]
-      }
-  }
-  res.status(200).send(responseBody);
-});
 
 apiRouter.post('/question8', (req, res) => {
   var userId = req.body.userRequest.user.id;
@@ -325,116 +295,7 @@ apiRouter.post('/question14', (req, res) => {
   res.status(200).send(responseBody);
 });
 
-apiRouter.post('/result', (req, res) => {
-    var mesg = req.body.userRequest.utterance;
-    var userId = req.body.userRequest.user.id;
-    mbtiper = ['','','','','','','',''];
-    var mbti = '';
-    if (mesg == "네"){
-      mbti = 'N';
-    }
-    else if (mesg == "아니오") {
-      mbti = 'S';
-    }
-    userDB[userId][1] += mbti;
-    var e = 0;
-    var n = 0;
-    var f = 0;
-    var j = 0;
-    for(i=0; i<2; i++){
-        if(userDB[userId][0][i] == "E"){
-            e++;
-        }
-    }
-    for(i=0; i<2; i++){
-        if(userDB[userId][1][i] == "N"){
-            n++;
-        }
-    }
-    for(i=0; i<1; i++){
-        if(userDB[userId][2][i] == "F"){
-            f++;
-        }
-    }
-    for(i=0; i<2; i++){
-        if(userDB[userId][3][i] == "J"){
-            j++;
-        }
-    }
-    var i = 2-e;
-    var s = 2-n;
-    var t = 1-f;
-    var p = 2-j;
-    mbtiper[0] += 20 * e;
-    mbtiper[1] += 20 * i;
-    mbtiper[2] += 20 * n;
-    mbtiper[3] += 20 * s;
-    mbtiper[4] += 20 * t;
-    mbtiper[5] += 20 * f;
-    mbtiper[6] += 20 * j;
-    mbtiper[7] += 20 * p;
-        if(mbtiper[0]>mbtiper[1]){
-            userDB[userId][4] += 'E';
-        } else {
-            userDB[userId][4] += 'I';
-        }
-        if(mbtiper[2]>mbtiper[3]){
-            userDB[userId][4] += 'N';
-        } else {
-            userDB[userId][4] += 'S';
-        }
-        if(mbtiper[4]>mbtiper[5]){
-            userDB[userId][4] += 'T';
-        } else {
-            userDB[userId][4] += 'F';
-        }
-        if(mbtiper[6]>mbtiper[7]){
-            userDB[userId][4] += 'J';
-        } else {
-            userDB[userId][4] += 'P';
-        }
-    const responseBody = {
-        version: "2.0",
-        template: {
-            outputs: [
-                {
-                    simpleText: {
-                        text: "당신의 MBTI는 : "+userDB[userId][4]
-                    }
-                }
-            ],
-            quickReplies: [{
-                action: "block",
-                label: "MBTI 테스트 다시하기",
-                message: "MBTI 테스트 다시하기",
-                blockId : "62977ff05ceed96c385449b9"
-            },
-            {
-                action: "block",
-                label: "결과 상세보기",
-                message: "결과 상세보기",
-                blockId: "62987b78e7a0253c7662dcd9"
-            }]
-        }
-    }
-    res.status(200).send(responseBody);
-  });
 
-apiRouter.post('/percent', (req, res) => {
-    const responseBody = {
-        version: "2.0",
-        template: {
-            outputs: [
-                {
-                    simpleText: {
-                        text: 'E: '+mbtiper[0]+'%\nI: '+mbtiper[1]+'%\nN: '+mbtiper[2]+'%\nS: '+mbtiper[3]+'%\nT: '+mbtiper[4]+'%\nF: '+mbtiper[5]+'%\nJ: '+mbtiper[6]+'%\nP: '+mbtiper[7]+'%'
-                    }
-                }
-            ]
-        }
-    }
-    res.status(200).send(responseBody);
-  });
 app.listen((process.env.PORT || 3000), function() {
   console.log('Example skill server listening on port 3000!');
 });
