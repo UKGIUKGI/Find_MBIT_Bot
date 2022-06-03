@@ -5,7 +5,6 @@ const bodyParser = require('body-parser');
 
 const apiRouter = express.Router();
 
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
@@ -14,11 +13,7 @@ app.use(bodyParser.urlencoded({
 app.use('/api', apiRouter);
 
 let userDB = new Array();
-let mbtiper = new Array();
 
-<<<<<<< HEAD
-apiRouter.post('/test', (req, res) => {
-=======
 apiRouter.post('/sayHello', function(req, res) {
   const responseBody = {
     version: "2.0",
@@ -52,35 +47,19 @@ apiRouter.post('/question1', (req, res) => {
   console.log('[q1:user message] ', mesg);
   userDB[userId] = ['','','','',''];
   console.log(userDB[userId]);
->>>>>>> 9cc768840e30632a42343600db176f035dc0ebf9
   const responseBody = {
       version: "2.0",
       template: {
           outputs: [
               {
                   simpleText: {
-<<<<<<< HEAD
-                      text: 'MBTI 테스트 question8-14\n시작하려면 시작하기 버튼을 눌러주세요!'
-=======
                       text: '금방 새로운 직장 사람들과 어울리기 시작합니다.'
->>>>>>> 9cc768840e30632a42343600db176f035dc0ebf9
                   }
               }
           ],
           quickReplies: [
               {
                   action: "block",
-<<<<<<< HEAD
-                  label: "시작하기",
-                  message: "시작하기",
-                  blockId: "62977ff05ceed96c385449b9"
-              },
-              {
-                  action: "block",
-                  label: "나중에 하기",
-                  message: "나중에 하기",
-                  blockId: "6297861be7a0253c7662ccb8"
-=======
                   label: "네",
                   message: "네",
                   blockId: "6297b11ae7a0253c7662ccea"
@@ -90,7 +69,6 @@ apiRouter.post('/question1', (req, res) => {
                   label: "아니오",
                   message: "아니오",
                   blockId: "6297b11ae7a0253c7662ccea"
->>>>>>> 9cc768840e30632a42343600db176f035dc0ebf9
               }
           ]
       }
@@ -98,13 +76,6 @@ apiRouter.post('/question1', (req, res) => {
   res.status(200).send(responseBody);
 });
 
-<<<<<<< HEAD
-apiRouter.post('/question8', (req, res) => {
-  var userId = req.body.userRequest.user.id;
-  userDB[userId] = ['','','','',''];
-  console.log(userDB);
-  const responseBody = {
-=======
 apiRouter.post('/question2', (req, res) => {
     var userId = req.body.userRequest.user.id;
     var mesg = req.body.userRequest.utterance;
@@ -118,34 +89,18 @@ apiRouter.post('/question2', (req, res) => {
     userDB[userId][0] += mbti;
     console.log(userDB[userId]);
     const responseBody = {
->>>>>>> 9cc768840e30632a42343600db176f035dc0ebf9
       version: "2.0",
       template: {
           outputs: [
               {
                   simpleText: {
-<<<<<<< HEAD
-                      text: '[question8]\n여행 계획을 어떻게 세우시나요?'
-=======
                       text: '평소 깻잎논쟁에 대해 1시간 이상을 생각해 보는 편입니다.'
->>>>>>> 9cc768840e30632a42343600db176f035dc0ebf9
                   }
               }
           ],
           quickReplies: [
               {
                   action: "block",
-<<<<<<< HEAD
-                  label: "테마만 정한다(ex.맛집 방문하는 날, 사진 찍는 날)",
-                  message: "테마만 정한다(ex.맛집 방문하는 날, 사진 찍는 날)",
-                  blockId: "629780e9e7a0253c7662cca6"
-              },
-              {
-                  action: "block",
-                  label: "시간과 장소를 자세하게 정한다",
-                  message: "시간과 장소를 자세하게 정한다",
-                  blockId: "629780e9e7a0253c7662cca6"
-=======
                   label: "네",
                   message: "네",
                   blockId: "6297b122ab89e678ee86b331"
@@ -155,7 +110,6 @@ apiRouter.post('/question2', (req, res) => {
                   label: "아니오",
                   message: "아니오",
                   blockId: "6297b122ab89e678ee86b331"
->>>>>>> 9cc768840e30632a42343600db176f035dc0ebf9
               }
           ]
       }
@@ -163,20 +117,6 @@ apiRouter.post('/question2', (req, res) => {
   res.status(200).send(responseBody);
 });
 
-<<<<<<< HEAD
-apiRouter.post('/question9', (req, res) => {
-  var mesg = req.body.userRequest.utterance;
-  var userId = req.body.userRequest.user.id;
-  var mbti = '';
-  if (mesg == "테마만 정한다(ex.맛집 방문하는 날, 사진 찍는 날)"){
-    mbti = 'P';
-  }
-  else if (mesg == "시간과 장소를 자세하게 정한다") {
-    mbti = 'J';
-  }
-  userDB[userId][3] += mbti;
-  console.log(userDB);
-=======
 apiRouter.post('/question3', function(req, res) {
     var userId = req.body.userRequest.user.id;
     var mesg = req.body.userRequest.utterance;
@@ -230,242 +170,17 @@ apiRouter.post('/question4', (req, res) => {
   }
   userDB[userId][2] += mbti;
   console.log(userDB[userId]);
->>>>>>> 9cc768840e30632a42343600db176f035dc0ebf9
   const responseBody = {
       version: "2.0",
       template: {
           outputs: [
               {
                   simpleText: {
-<<<<<<< HEAD
-                      text: '[question9]\n재미있는 책이나 비디오 게임이 사교 모임보다 더 낫습니다.'
-=======
                       text: "주의깊게 미리 계획하기 보다는 즉흥적으로 움직입니다."
->>>>>>> 9cc768840e30632a42343600db176f035dc0ebf9
                   }
               }
           ],
           quickReplies: [
-<<<<<<< HEAD
-              {
-                  action: "block",
-                  label: "네",
-                  message: "네",
-                  blockId: "629780f4ab89e678ee86b2de"
-              },
-              {
-                  action: "block",
-                  label: "아니오",
-                  message: "아니오",
-                  blockId: "629780f4ab89e678ee86b2de"
-              }
-          ]
-      }
-  }
-  res.status(200).send(responseBody);
-});
-
-apiRouter.post('/question10', (req, res) => {
-  var mesg = req.body.userRequest.utterance;
-  var userId = req.body.userRequest.user.id;
-  var mbti = '';
-  if (mesg == "네"){
-    mbti = 'I';
-  }
-  else if (mesg == "아니오") {
-    mbti = 'E';
-  }
-  userDB[userId][0] += mbti;
-  console.log(userDB);
-  const responseBody = {
-      version: "2.0",
-      template: {
-          outputs: [
-              {
-                  simpleText: {
-                      text: '[question10]\n본인이 창의적이기보다 현실적인 사람이라고 생각합니다.'
-                  }
-              }
-          ],
-          quickReplies: [
-              {
-                  action: "block",
-                  label: "네",
-                  message: "네",
-                  blockId: "629781015ceed96c385449c8"
-              },
-              {
-                  action: "block",
-                  label: "아니오",
-                  message: "아니오",
-                  blockId: "629781015ceed96c385449c8"
-              }
-          ]
-      }
-  }
-  res.status(200).send(responseBody);
-});
-
-apiRouter.post('/question11', (req, res) => {
-  var mesg = req.body.userRequest.utterance;
-  var userId = req.body.userRequest.user.id;
-  var mbti = '';
-  if (mesg == "네"){
-    mbti = 'S';
-  }
-  else if (mesg == "아니오") {
-    mbti = 'N';
-  }
-  userDB[userId][1] += mbti;
-  console.log(userDB);
-  const responseBody = {
-      version: "2.0",
-      template: {
-          outputs: [
-              {
-                  simpleText: {
-                      text: '[question11]\n팀플을 하는 경우, 충실하지만 실적을 못 내는 팀원을 제명하기 어려워합니다.'
-                  }
-              }
-          ],
-          quickReplies: [
-              {
-                  action: "block",
-                  label: "네",
-                  message: "네",
-                  blockId: "6297810fe7a0253c7662cca8"
-              },
-              {
-                  action: "block",
-                  label: "아니오",
-                  message: "아니오",
-                  blockId: "6297810fe7a0253c7662cca8"
-              }
-          ]
-      }
-  }
-  res.status(200).send(responseBody);
-});
-
-apiRouter.post('/question12', (req, res) => {
-  var mesg = req.body.userRequest.utterance;
-  var userId = req.body.userRequest.user.id;
-  var mbti = '';
-  if (mesg == "네"){
-    mbti = 'F';
-  }
-  else if (mesg == "아니오") {
-    mbti = 'T';
-  }
-  userDB[userId][2] += mbti;
-  console.log(userDB);
-  const responseBody = {
-      version: "2.0",
-      template: {
-          outputs: [
-              {
-                  simpleText: {
-                      text: '[question12]\n집과 업무 환경이 잘 정돈되어 있습니다.'
-                  }
-              }
-          ],
-          quickReplies: [
-              {
-                  action: "block",
-                  label: "네",
-                  message: "네",
-                  blockId: "6297811bf591aa190554a22e"
-              },
-              {
-                  action: "block",
-                  label: "아니오",
-                  message: "아니오",
-                  blockId: "6297811bf591aa190554a22e"
-              }
-          ]
-      }
-  }
-  res.status(200).send(responseBody);
-});
-
-apiRouter.post('/question13', (req, res) => {
-  var mesg = req.body.userRequest.utterance;
-  var userId = req.body.userRequest.user.id;
-  var mbti = '';
-  if (mesg == "네"){
-    mbti = 'J';
-  }
-  else if (mesg == "아니오") {
-    mbti = 'P';
-  }
-  userDB[userId][3] += mbti;
-  console.log(userDB);
-  const responseBody = {
-      version: "2.0",
-      template: {
-          outputs: [
-              {
-                  simpleText: {
-                      text: '[question13]\n친구 관계가 좁고 깊은 편입니다.'
-                  }
-              }
-          ],
-          quickReplies: [
-              {
-                  action: "block",
-                  label: "네",
-                  message: "네",
-                  blockId: "62978127ab89e678ee86b2e2"
-              },
-              {
-                  action: "block",
-                  label: "아니오",
-                  message: "아니오",
-                  blockId: "62978127ab89e678ee86b2e2"
-              }
-          ]
-      }
-  }
-  res.status(200).send(responseBody);
-});
-
-apiRouter.post('/question14', (req, res) => {
-  var mesg = req.body.userRequest.utterance;
-  var userId = req.body.userRequest.user.id;
-  var mbti = '';
-  if (mesg == "네"){
-    mbti = 'I';
-  }
-  else if (mesg == "아니오") {
-    mbti = 'E';
-  }
-  userDB[userId][0] += mbti;
-  console.log(userDB);
-  const responseBody = {
-      version: "2.0",
-      template: {
-          outputs: [
-              {
-                  simpleText: {
-                      text: '[question14]\n공부하기 싫을 때 공부는 왜 해야 하는 것인지 고민에 빠질 때가 있습니다.'
-                  }
-              }
-          ],
-          quickReplies: [
-              {
-                  action: "block",
-                  label: "네",
-                  message: "네",
-                  blockId: "62979c9ce7a0253c7662ccd4"
-              },
-              {
-                  action: "block",
-                  label: "아니오",
-                  message: "아니오",
-                  blockId: "62979c9ce7a0253c7662ccd4"
-              }
-          ]
-=======
             {
                 action: "block",
                 label: "네",
@@ -479,7 +194,6 @@ apiRouter.post('/question14', (req, res) => {
                 blockId: "6297b12be7a0253c7662ccec"
             }
         ]
->>>>>>> 9cc768840e30632a42343600db176f035dc0ebf9
       }
   }
   res.status(200).send(responseBody);
@@ -608,118 +322,287 @@ apiRouter.post('/question7', (req, res) => {
   res.status(200).send(responseBody);
 });
 
-apiRouter.post('/result', (req, res) => {
-    var mesg = req.body.userRequest.utterance;
+apiRouter.post('/question8', (req, res) => {
     var userId = req.body.userRequest.user.id;
-<<<<<<< HEAD
-    mbtiper = ['','','','','','','',''];
-    var mbti = '';
-    if (mesg == "네"){
-      mbti = 'N';
-    }
-    else if (mesg == "아니오") {
-      mbti = 'S';
-    }
-    userDB[userId][1] += mbti;
-    var e = 0;
-    var n = 0;
-    var f = 0;
-    var j = 0;
-    for(i=0; i<2; i++){
-        if(userDB[userId][0][i] == "E"){
-            e++;
-        }
-    }
-    for(i=0; i<2; i++){
-        if(userDB[userId][1][i] == "N"){
-            n++;
-        }
-    }
-    for(i=0; i<1; i++){
-        if(userDB[userId][2][i] == "F"){
-            f++;
-        }
-    }
-    for(i=0; i<2; i++){
-        if(userDB[userId][3][i] == "J"){
-            j++;
-        }
-    }
-    var i = 2-e;
-    var s = 2-n;
-    var t = 1-f;
-    var p = 2-j;
-    mbtiper[0] += 20 * e;
-    mbtiper[1] += 20 * i;
-    mbtiper[2] += 20 * n;
-    mbtiper[3] += 20 * s;
-    mbtiper[4] += 20 * t;
-    mbtiper[5] += 20 * f;
-    mbtiper[6] += 20 * j;
-    mbtiper[7] += 20 * p;
-        if(mbtiper[0]>mbtiper[1]){
-            userDB[userId][4] += 'E';
-        } else {
-            userDB[userId][4] += 'I';
-        }
-        if(mbtiper[2]>mbtiper[3]){
-            userDB[userId][4] += 'N';
-        } else {
-            userDB[userId][4] += 'S';
-        }
-        if(mbtiper[4]>mbtiper[5]){
-            userDB[userId][4] += 'T';
-        } else {
-            userDB[userId][4] += 'F';
-        }
-        if(mbtiper[6]>mbtiper[7]){
-            userDB[userId][4] += 'J';
-        } else {
-            userDB[userId][4] += 'P';
-        }
+    userDB[userId] = ['','','','',''];
+    console.log(userDB);
     const responseBody = {
         version: "2.0",
         template: {
             outputs: [
                 {
                     simpleText: {
-                        text: "당신의 MBTI는 : "+userDB[userId][4]
+                        text: '[question8]\n여행 계획을 어떻게 세우시나요?'
                     }
                 }
             ],
-            quickReplies: [{
-                action: "block",
-                label: "MBTI 테스트 다시하기",
-                message: "MBTI 테스트 다시하기",
-                blockId : "62977ff05ceed96c385449b9"
-            },
-            {
-                action: "block",
-                label: "결과 상세보기",
-                message: "결과 상세보기",
-                blockId: "62987b78e7a0253c7662dcd9"
-            }]
-        }
-    }
-    res.status(200).send(responseBody);
-  });
-
-apiRouter.post('/percent', (req, res) => {
-    const responseBody = {
-        version: "2.0",
-        template: {
-            outputs: [
+            quickReplies: [
                 {
-                    simpleText: {
-                        text: 'E: '+mbtiper[0]+'%\nI: '+mbtiper[1]+'%\nN: '+mbtiper[2]+'%\nS: '+mbtiper[3]+'%\nT: '+mbtiper[4]+'%\nF: '+mbtiper[5]+'%\nJ: '+mbtiper[6]+'%\nP: '+mbtiper[7]+'%'
-                    }
+                    action: "block",
+                    label: "테마만 정한다(ex.맛집 방문하는 날, 사진 찍는 날)",
+                    message: "테마만 정한다(ex.맛집 방문하는 날, 사진 찍는 날)",
+                    blockId: "629780e9e7a0253c7662cca6"
+                },
+                {
+                    action: "block",
+                    label: "시간과 장소를 자세하게 정한다",
+                    message: "시간과 장소를 자세하게 정한다",
+                    blockId: "629780e9e7a0253c7662cca6"
                 }
             ]
         }
     }
     res.status(200).send(responseBody);
   });
-=======
+  
+  apiRouter.post('/question9', (req, res) => {
+    var mesg = req.body.userRequest.utterance;
+    var userId = req.body.userRequest.user.id;
+    var mbti = '';
+    if (mesg == "테마만 정한다(ex.맛집 방문하는 날, 사진 찍는 날)"){
+      mbti = 'P';
+    }
+    else if (mesg == "시간과 장소를 자세하게 정한다") {
+      mbti = 'J';
+    }
+    userDB[userId][3] += mbti;
+    console.log(userDB);
+    const responseBody = {
+        version: "2.0",
+        template: {
+            outputs: [
+                {
+                    simpleText: {
+                        text: '[question9]\n재미있는 책이나 비디오 게임이 사교 모임보다 더 낫습니다.'
+                    }
+                }
+            ],
+            quickReplies: [
+                {
+                    action: "block",
+                    label: "네",
+                    message: "네",
+                    blockId: "629780f4ab89e678ee86b2de"
+                },
+                {
+                    action: "block",
+                    label: "아니오",
+                    message: "아니오",
+                    blockId: "629780f4ab89e678ee86b2de"
+                }
+            ]
+        }
+    }
+    res.status(200).send(responseBody);
+  });
+  
+  apiRouter.post('/question10', (req, res) => {
+    var mesg = req.body.userRequest.utterance;
+    var userId = req.body.userRequest.user.id;
+    var mbti = '';
+    if (mesg == "네"){
+      mbti = 'I';
+    }
+    else if (mesg == "아니오") {
+      mbti = 'E';
+    }
+    userDB[userId][0] += mbti;
+    console.log(userDB);
+    const responseBody = {
+        version: "2.0",
+        template: {
+            outputs: [
+                {
+                    simpleText: {
+                        text: '[question10]\n본인이 창의적이기보다 현실적인 사람이라고 생각합니다.'
+                    }
+                }
+            ],
+            quickReplies: [
+                {
+                    action: "block",
+                    label: "네",
+                    message: "네",
+                    blockId: "629781015ceed96c385449c8"
+                },
+                {
+                    action: "block",
+                    label: "아니오",
+                    message: "아니오",
+                    blockId: "629781015ceed96c385449c8"
+                }
+            ]
+        }
+    }
+    res.status(200).send(responseBody);
+  });
+  
+  apiRouter.post('/question11', (req, res) => {
+    var mesg = req.body.userRequest.utterance;
+    var userId = req.body.userRequest.user.id;
+    var mbti = '';
+    if (mesg == "네"){
+      mbti = 'S';
+    }
+    else if (mesg == "아니오") {
+      mbti = 'N';
+    }
+    userDB[userId][1] += mbti;
+    console.log(userDB);
+    const responseBody = {
+        version: "2.0",
+        template: {
+            outputs: [
+                {
+                    simpleText: {
+                        text: '[question11]\n팀플을 하는 경우, 충실하지만 실적을 못 내는 팀원을 제명하기 어려워합니다.'
+                    }
+                }
+            ],
+            quickReplies: [
+                {
+                    action: "block",
+                    label: "네",
+                    message: "네",
+                    blockId: "6297810fe7a0253c7662cca8"
+                },
+                {
+                    action: "block",
+                    label: "아니오",
+                    message: "아니오",
+                    blockId: "6297810fe7a0253c7662cca8"
+                }
+            ]
+        }
+    }
+    res.status(200).send(responseBody);
+  });
+  
+  apiRouter.post('/question12', (req, res) => {
+    var mesg = req.body.userRequest.utterance;
+    var userId = req.body.userRequest.user.id;
+    var mbti = '';
+    if (mesg == "네"){
+      mbti = 'F';
+    }
+    else if (mesg == "아니오") {
+      mbti = 'T';
+    }
+    userDB[userId][2] += mbti;
+    console.log(userDB);
+    const responseBody = {
+        version: "2.0",
+        template: {
+            outputs: [
+                {
+                    simpleText: {
+                        text: '[question12]\n집과 업무 환경이 잘 정돈되어 있습니다.'
+                    }
+                }
+            ],
+            quickReplies: [
+                {
+                    action: "block",
+                    label: "네",
+                    message: "네",
+                    blockId: "6297811bf591aa190554a22e"
+                },
+                {
+                    action: "block",
+                    label: "아니오",
+                    message: "아니오",
+                    blockId: "6297811bf591aa190554a22e"
+                }
+            ]
+        }
+    }
+    res.status(200).send(responseBody);
+  });
+  
+  apiRouter.post('/question13', (req, res) => {
+    var mesg = req.body.userRequest.utterance;
+    var userId = req.body.userRequest.user.id;
+    var mbti = '';
+    if (mesg == "네"){
+      mbti = 'J';
+    }
+    else if (mesg == "아니오") {
+      mbti = 'P';
+    }
+    userDB[userId][3] += mbti;
+    console.log(userDB);
+    const responseBody = {
+        version: "2.0",
+        template: {
+            outputs: [
+                {
+                    simpleText: {
+                        text: '[question13]\n친구 관계가 좁고 깊은 편입니다.'
+                    }
+                }
+            ],
+            quickReplies: [
+                {
+                    action: "block",
+                    label: "네",
+                    message: "네",
+                    blockId: "62978127ab89e678ee86b2e2"
+                },
+                {
+                    action: "block",
+                    label: "아니오",
+                    message: "아니오",
+                    blockId: "62978127ab89e678ee86b2e2"
+                }
+            ]
+        }
+    }
+    res.status(200).send(responseBody);
+  });
+  
+  apiRouter.post('/question14', (req, res) => {
+    var mesg = req.body.userRequest.utterance;
+    var userId = req.body.userRequest.user.id;
+    var mbti = '';
+    if (mesg == "네"){
+      mbti = 'I';
+    }
+    else if (mesg == "아니오") {
+      mbti = 'E';
+    }
+    userDB[userId][0] += mbti;
+    console.log(userDB);
+    const responseBody = {
+        version: "2.0",
+        template: {
+            outputs: [
+                {
+                    simpleText: {
+                        text: '[question14]\n공부하기 싫을 때 공부는 왜 해야 하는 것인지 고민에 빠질 때가 있습니다.'
+                    }
+                }
+            ],
+            quickReplies: [
+                {
+                    action: "block",
+                    label: "네",
+                    message: "네",
+                    blockId: "62979c9ce7a0253c7662ccd4"
+                },
+                {
+                    action: "block",
+                    label: "아니오",
+                    message: "아니오",
+                    blockId: "62979c9ce7a0253c7662ccd4"
+                }
+            ]
+        }
+    }
+    res.status(200).send(responseBody);
+  });
+
+apiRouter.post('/result', (req, res) => {
+    var userId = req.body.userRequest.user.id;
   var mesg = req.body.userRequest.utterance;
   console.log('[result:user message] ', mesg);
   var mbti = ''; 
@@ -890,7 +773,117 @@ function result(Array){
     Array[4]+='J';
 }
 
->>>>>>> 9cc768840e30632a42343600db176f035dc0ebf9
+apiRouter.post('/result', (req, res) => {
+    var mesg = req.body.userRequest.utterance;
+    var userId = req.body.userRequest.user.id;
+    mbtiper = ['','','','','','','',''];
+    var mbti = '';
+    if (mesg == "네"){
+      mbti = 'N';
+    }
+    else if (mesg == "아니오") {
+      mbti = 'S';
+    }
+    userDB[userId][1] += mbti;
+    var e = 0;
+    var n = 0;
+    var f = 0;
+    var j = 0;
+    for(i=0; i<2; i++){
+        if(userDB[userId][0][i] == "E"){
+            e++;
+        }
+    }
+    for(i=0; i<2; i++){
+        if(userDB[userId][1][i] == "N"){
+            n++;
+        }
+    }
+    for(i=0; i<1; i++){
+        if(userDB[userId][2][i] == "F"){
+            f++;
+        }
+    }
+    for(i=0; i<2; i++){
+        if(userDB[userId][3][i] == "J"){
+            j++;
+        }
+    }
+    var i = 2-e;
+    var s = 2-n;
+    var t = 1-f;
+    var p = 2-j;
+    mbtiper[0] += 20 * e;
+    mbtiper[1] += 20 * i;
+    mbtiper[2] += 20 * n;
+    mbtiper[3] += 20 * s;
+    mbtiper[4] += 20 * t;
+    mbtiper[5] += 20 * f;
+    mbtiper[6] += 20 * j;
+    mbtiper[7] += 20 * p;
+        if(mbtiper[0]>mbtiper[1]){
+            userDB[userId][4] += 'E';
+        } else {
+            userDB[userId][4] += 'I';
+        }
+        if(mbtiper[2]>mbtiper[3]){
+            userDB[userId][4] += 'N';
+        } else {
+            userDB[userId][4] += 'S';
+        }
+        if(mbtiper[4]>mbtiper[5]){
+            userDB[userId][4] += 'T';
+        } else {
+            userDB[userId][4] += 'F';
+        }
+        if(mbtiper[6]>mbtiper[7]){
+            userDB[userId][4] += 'J';
+        } else {
+            userDB[userId][4] += 'P';
+        }
+    const responseBody = {
+        version: "2.0",
+        template: {
+            outputs: [
+                {
+                    simpleText: {
+                        text: "당신의 MBTI는 : "+userDB[userId][4]
+                    }
+                }
+            ],
+            quickReplies: [{
+                action: "block",
+                label: "MBTI 테스트 다시하기",
+                message: "MBTI 테스트 다시하기",
+                blockId : "62977ff05ceed96c385449b9"
+            },
+            {
+                action: "block",
+                label: "결과 상세보기",
+                message: "결과 상세보기",
+                blockId: "62987b78e7a0253c7662dcd9"
+            }]
+        }
+    }
+    res.status(200).send(responseBody);
+  });
+
+apiRouter.post('/percent', (req, res) => {
+    const responseBody = {
+        version: "2.0",
+        template: {
+            outputs: [
+                {
+                    simpleText: {
+                        text: 'E: '+mbtiper[0]+'%\nI: '+mbtiper[1]+'%\nN: '+mbtiper[2]+'%\nS: '+mbtiper[3]+'%\nT: '+mbtiper[4]+'%\nF: '+mbtiper[5]+'%\nJ: '+mbtiper[6]+'%\nP: '+mbtiper[7]+'%'
+                    }
+                }
+            ]
+        }
+    }
+    res.status(200).send(responseBody);
+  });
+
 app.listen((process.env.PORT || 3000), function() {
   console.log('Example skill server listening on port 3000!');
 });
