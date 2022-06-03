@@ -26,9 +26,9 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-* MBTI를 알기 위해서는 딱딱한 질문식의 설문을 일일히 체크해야 합니다.
-* 저희는 그런 방식보다는 챗봇과의 대화를 통해 MBTI를 알아내는 방식을 챗봇에 적용하고자 합니다.
-* 저희 챗봇은 Kakao Messaging API를 기반으로 만들어졌습니다.
+* 자신의 MBTI를 알기 위해서는 테스트 사이트를 직접 검색해 접속해야 합니다.
+* 저희는 그런 방식보다는 챗봇을 통해 MBTI 테스트를 진행하여 보다 간편하게 MBTI를 알아내고자 했습니다.
+* 이 챗봇은 Kakao Messaging API를 기반으로 만들어져 있어, 누구나 쉽게 MBTI 테스트를 진행할 수 있습니다.
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -66,6 +66,9 @@
 * "MBTI 챗봇" 채널을 추가해 주세요.
  link: <http://pf.kakao.com/_jAjtb>
 <img src="channel.jpg" width="270px" height="450px"></img><br/>
+
+* 또는 아래의 qr코드를 스캔하면 챗봇과 바로 채팅을 시작할 수 있습니다.
+<img src="qrcode.jpg" width="250px" height="250px"></img><br/>
 
 * 채팅창에 "안녕"을 입력하면 챗봇이 메시지를 전송합니다.
 <img src="hello.jpg" width="300px" height="300px"></img><br/>
