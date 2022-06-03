@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-
 const bodyParser = require('body-parser');
 
 const apiRouter = express.Router();
@@ -11,6 +10,10 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use('/api', apiRouter);
+
+// NAVER SEARCH API
+const CLIENT_ID = 'fhcqiYQacNyJGILdJBzL';
+const CLIENT_SECRET = 'dmxhW0M_NA';
 
 let userDB = new Array();
 
@@ -883,7 +886,14 @@ apiRouter.post('/result', (req, res) => {
               label: "자세한 결과 보기",
               message: "자세한 결과 보기",
               blockId: "6297bc58ab89e678ee86b33a"
-          }]
+          },
+          {
+              action: "block",
+              label: "내 MBTI 특징은?",
+              message: "내 MBTI 특징은?",
+              blockId: "6299ef8aab89e678ee86da0d"
+          }
+        ]
       }
   }
   res.status(200).send(responseBody);
@@ -994,6 +1004,56 @@ function count_mbti(item_list, mbti_ch) {
     }
     return result;
 }
+
+apiRouter.post('/searchmbti', (req, res) => {
+    var userId = req.body.userRequest.user.id;
+    var userMbti = userDB[userId][4];
+    var api_url = 'https://openapi.naver.com/v1/search/blog?query='+ encodeURI(userMbti + '특징');
+    var request = require('request');
+    console.log(api_url);
+
+    var options = {
+        url: api_url,
+        headers: {'X-Naver-Client-Id':CLIENT_ID, 'X-Naver-Client-Secret': CLIENT_SECRET}
+     };
+
+     request.get(options, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            var result = JSON.parse(body);
+            console.log(result.items);
+            const responseBody = {
+                version: "2.0",
+                template: {
+                    outputs: [
+                        {
+                            simpleText: {
+                                text: result.items[0].link
+                            }
+                        }
+                    ],
+                    quickReplies: [{
+                        action: "block",
+                        label: "MBTI 테스트 다시하기",
+                        message: "MBTI 테스트 다시하기",
+                        blockId : "6297b10d5ceed96c38544a06"
+                    },
+                    {
+                        action: "block",
+                        label: "자세한 결과 보기",
+                        message: "자세한 결과 보기",
+                        blockId: "6297bc58ab89e678ee86b33a"
+                    }
+                  ]
+                }
+            }
+            res.status(200).send(responseBody);
+        } else {
+          res.status(response.statusCode).end();
+          console.log('error = ' + response.statusCode);
+        }
+    });
+
+});
 
 app.listen((process.env.PORT || 3000), function() {
   console.log('Example skill server listening on port 3000!');
