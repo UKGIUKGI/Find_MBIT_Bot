@@ -892,6 +892,12 @@ apiRouter.post('/result', (req, res) => {
               label: "내 MBTI 특징은?",
               message: "내 MBTI 특징은?",
               blockId: "6299ef8aab89e678ee86da0d"
+          },
+          {
+            action: "block",
+            label: "내 MBTI 관련 영상 보러 가기",
+            message: "내 MBTI 관련 영상 보러 가기",
+            blockId: "629b6af95ceed96c38547c19"
           }
         ]
       }
@@ -1028,6 +1034,88 @@ apiRouter.post('/searchmbti', (req, res) => {
                         {
                             simpleText: {
                                 text: result.items[0].link
+                            }
+                        }
+                    ],
+                    quickReplies: [{
+                        action: "block",
+                        label: "MBTI 테스트 다시하기",
+                        message: "MBTI 테스트 다시하기",
+                        blockId : "6297b10d5ceed96c38544a06"
+                    },
+                    {
+                        action: "block",
+                        label: "자세한 결과 보기",
+                        message: "자세한 결과 보기",
+                        blockId: "6297bc58ab89e678ee86b33a"
+                    }
+                  ]
+                }
+            }
+            res.status(200).send(responseBody);
+        } else {
+          res.status(response.statusCode).end();
+          console.log('error = ' + response.statusCode);
+        }
+    });
+
+});
+
+apiRouter.post('/mbtivideo', (req, res) => {
+    var userId = req.body.userRequest.user.id;
+    var userMbti = userDB[userId][4];
+    var api_url = 'https://dapi.kakao.com/v2/search/vclip?query=' + userMbti;
+    var request = require('request');
+    console.log(api_url);
+
+    var options = {
+        url: api_url,
+        method: 'GET',
+        headers: {
+        'Authorization': 'KakaoAK 45ad937a71c8578ec94f9b5c6c58838b'
+        },
+        encoding: 'UTF-8',
+    }
+
+     request(options, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            var result = JSON.parse(body);
+            console.log(result.documents);
+            const responseBody = {
+                version: "2.0",
+                template: {
+                    outputs: [
+                        {
+                            "listCard" : {
+                                "header": {
+                                    "title":userMbti+" 관련 영상입니다."
+                                },
+                                "items": [
+                                    {
+                                        "title": result.documents[0].title,
+                                        "description": result.documents[0].author,
+                                        "imageUrl": result.documents[0].thumbnail,
+                                        "link":{
+                                            "web": result.documents[0].url
+                                          }
+                                    },
+                                    {
+                                        "title": result.documents[1].title,
+                                        "description": result.documents[1].author,
+                                        "imageUrl": result.documents[1].thumbnail,
+                                        "link":{
+                                            "web": result.documents[1].url
+                                          }
+                                    },
+                                    {
+                                        "title": result.documents[2].title,
+                                        "description": result.documents[2].author,
+                                        "imageUrl": result.documents[2].thumbnail,
+                                        "link":{
+                                            "web": result.documents[2].url
+                                          }
+                                    }
+                                ]
                             }
                         }
                     ],
