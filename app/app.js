@@ -1143,6 +1143,98 @@ apiRouter.post('/mbtivideo', (req, res) => {
 
 });
 
+apiRouter.post('/searchMBTI', (req, res) => {
+    var imageurl=""
+    var userId = req.body.userRequest.user.id;
+    var userMbti = userDB[userId][4];
+    var api_url = 'https://openapi.naver.com/v1/search/blog?query='+ encodeURI(userMbti + '특징');
+    var request = require('request');
+    url(userDB);
+    console.log(api_url);
+    
+    var options = {
+        url: api_url,
+        headers: {'X-Naver-Client-Id':CLIENT_ID, 'X-Naver-Client-Secret': CLIENT_SECRET}
+     };
+
+     request.get(options, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            var result = JSON.parse(body);
+            console.log(result.items);
+            const responseBody = {
+                version: "2.0",
+                template: {
+                    outputs: [
+                        {
+                            "basicCard": {
+                                "title": userMbti,
+                                "description": userMbti+"의 특징은?",
+                                "thumbnail": {
+                                  "imageUrl": imageurl
+                                },
+                                "buttons": [
+                                  {
+                                    "action":  "webLink",
+                                    "label": "알아보기",
+                                    "webLinkUrl": result.items[0].link
+                                  }
+                                ]
+                              }
+                        }
+                    ],
+                    quickReplies: [{
+                        action: "block",
+                        label: "MBTI 테스트 다시하기",
+                        message: "MBTI 테스트 다시하기",
+                        blockId : "6297b10d5ceed96c38544a06"
+                    },
+                    {
+                        action: "block",
+                        label: "자세한 결과 보기",
+                        message: "자세한 결과 보기",
+                        blockId: "6297bc58ab89e678ee86b33a"
+                    }
+                  ]
+                }
+            }
+            res.status(200).send(responseBody);
+        } else {
+          res.status(response.statusCode).end();
+          console.log('error = ' + response.statusCode);
+        }
+    });
+
+});
+
+function url(user){
+    
+    let mbtiDB = new Array();
+
+mbtiDB=['ISTP','ISTJ','ISFP','ISFJ','INTP','INTJ','INFP','INFJ','ESTP','ESTJ','ESFP','ESFJ','ENTP','ENTJ','ENFP','ENFJ']
+mbtiDB[0][0]='https://ifh.cc/g/ac3LWB.jpg';
+mbtiDB[1][0]='https://ifh.cc/g/VRFgFq.jpg';
+mbtiDB[2][0]='https://ifh.cc/g/svsfk3.jpg';
+mbtiDB[3][0]='https://ifh.cc/g/5LMJjh.jpg';
+mbtiDB[4][0]='https://ifh.cc/g/9HmqMW.jpg';
+mbtiDB[5][0]='https://ifh.cc/g/sGrpDH.jpg';
+mbtiDB[6][0]='https://ifh.cc/g/0cK5Rq.jpg';
+mbtiDB[7][0]='https://ifh.cc/g/34opTR.jpg';
+mbtiDB[8][0]='https://ifh.cc/g/6wHm7a.jpg';
+mbtiDB[9][0]='https://ifh.cc/g/fVGAnT.jpg';
+mbtiDB[10][0]='https://ifh.cc/g/0S0gk9.jpg';
+mbtiDB[11][0]='https://ifh.cc/g/Zh8mVx.jpg';
+mbtiDB[12][0]='https://ifh.cc/g/opCw8r.jpg';
+mbtiDB[13][0]='https://ifh.cc/g/PvlQyS.jpg';
+mbtiDB[14][0]='https://ifh.cc/g/AArxoZ.jpg';
+mbtiDB[15][0]='https://ifh.cc/g/c6GRH1.jpg';
+
+    for(let i=0; i<16;i++){
+        if(user[userId][4]==mbtiDB[i]){
+            imageurl=mbtiDB[i][0]
+        }
+    }
+}
+
 app.listen((process.env.PORT || 3000), function() {
   console.log('Example skill server listening on port 3000!');
 });
