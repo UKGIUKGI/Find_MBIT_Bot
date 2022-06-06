@@ -891,7 +891,7 @@ apiRouter.post('/result', (req, res) => {
               action: "block",
               label: "내 MBTI 특징은?",
               message: "내 MBTI 특징은?",
-              blockId: "6299ef8aab89e678ee86da0d"
+              blockId: "629ced645ceed96c38548222"
           },
           {
             action: "block",
