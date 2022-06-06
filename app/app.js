@@ -11,12 +11,12 @@ app.use(bodyParser.urlencoded({
 
 app.use('/api', apiRouter);
 
-// NAVER SEARCH API
-const CLIENT_ID = 'fhcqiYQacNyJGILdJBzL';
-const CLIENT_SECRET = 'dmxhW0M_NA';
-
 let userDB = new Array();
 
+require('dotenv').config();
+const KAKAO_KEY = process.env.KAKAO_KEY;
+const CLIENT_ID = process.env.CLIENT_ID;
+const CLIENT_SECRET = process.env.CLIENT_SECRET;
 
 const mbtiDB= new Array();
 mbtiDB[0] = ['ISTP', 'https://ifh.cc/g/ac3LWB.jpg'];
@@ -893,36 +893,39 @@ apiRouter.post('/result', (req, res) => {
               "basicCard": {
                 "title": "당신의 MBTI는 : "+userDB[userId][4],
                 "thumbnail": {
-                  "imageUrl": imageurl
+                  "imageUrl": imageurl,
+                  "fixedRatio": true,
+                  "height": 100,
+                  "width": 100
                 },
                 "buttons": [
                     {
                         action: "block",
-                        label: "자세한 결과 보기",
-                        message: "자세한 결과 보기",
+                        label: "상세결과보기",
+                        message: "상세결과보기",
                         blockId: "6297bc58ab89e678ee86b33a"
                     },
                     {
                         action: "block",
-                        label: "내 MBTI 특징은?",
-                        message: "내 MBTI 특징은?",
-                        blockId: "629ced645ceed96c38548222"
-                    },
-                    {
-                        action: "block",
-                        label: "내 MBTI 관련 영상보기",
-                        message: "내 MBTI 관련 영상보기",
-                        blockId: "629b6af95ceed96c38547c19"
+                        label: "테스트 다시하기",
+                        message: "테스트 다시하기",
+                        blockId : "6297b10d5ceed96c38544a06"
                     }
                 ]
               }
             }
           ],
           quickReplies: [{
-              action: "block",
-              label: "MBTI 테스트 다시하기",
-              message: "MBTI 테스트 다시하기",
-              blockId : "6297b10d5ceed96c38544a06"
+            action: "block",
+            label: "내 MBTI 특징은?",
+            message: "내 MBTI 특징은?",
+            blockId: "629ced645ceed96c38548222"
+          },
+          {
+            action: "block",
+            label: "내 MBTI 관련영상 보기",
+            message: "내 MBTI 관련영상 보기",
+            blockId: "629b6af95ceed96c38547c19"
           }
         ]
       }
@@ -988,7 +991,26 @@ apiRouter.post('/detail', (req, res) => {
                     text: "E와 I의 비율\nE : "+(E/(E+I)*100.0)+"%\nI : "+(I/(E+I)*100.0)+"%\n\nN와 S의 비율\nN : "+(N/(N+S)*100.0)+"%\nS : "+(S/(N+S)*100.0)+"%\n\nF와 T의 비율\nF : "+(F/(F+T)*100.0)+"%\nT : "+(T/(F+T)*100.0)+"%\n\nJ와 P의 비율\nJ : "+(J/(J+P)*100.0)+"%\nP : "+(P/(J+P)*100.0)+"%"
                   }
               }
-          ]
+          ],
+          quickReplies: [{
+            action: "block",
+            label: "테스트 다시하기",
+            message: "테스트 다시하기",
+            blockId : "6297b10d5ceed96c38544a06"
+        },
+        {
+            action: "block",
+            label: "내 MBTI 특징은?",
+            message: "내 MBTI 특징은?",
+            blockId: "629ced645ceed96c38548222"
+        },
+        {
+            action: "block",
+            label: "내 MBTI 관련영상 보기",
+            message: "내 MBTI 관련영상 보기",
+            blockId: "629b6af95ceed96c38547c19"
+        }
+      ]
       }
   }
   res.status(200).send(responseBody);
@@ -1047,7 +1069,7 @@ apiRouter.post('/mbtivideo', (req, res) => {
         url: api_url,
         method: 'GET',
         headers: {
-        'Authorization': 'KakaoAK 45ad937a71c8578ec94f9b5c6c58838b'
+        'Authorization': 'KakaoAK '+ KAKAO_KEY
         },
         encoding: 'UTF-8',
     }
@@ -1096,14 +1118,14 @@ apiRouter.post('/mbtivideo', (req, res) => {
                     ],
                     quickReplies: [{
                         action: "block",
-                        label: "MBTI 테스트 다시하기",
-                        message: "MBTI 테스트 다시하기",
+                        label: "테스트 다시하기",
+                        message: "테스트 다시하기",
                         blockId : "6297b10d5ceed96c38544a06"
                     },
                     {
                         action: "block",
-                        label: "자세한 결과 보기",
-                        message: "자세한 결과 보기",
+                        label: "상세결과보기",
+                        message: "상세결과보기",
                         blockId: "6297bc58ab89e678ee86b33a"
                     }
                   ]
@@ -1128,7 +1150,7 @@ apiRouter.post('/searchMBTI', (req, res) => {
     
     var options = {
         url: api_url,
-        headers: {'X-Naver-Client-Id':CLIENT_ID, 'X-Naver-Client-Secret': CLIENT_SECRET}
+        headers: {'X-Naver-Client-Id': CLIENT_ID, 'X-Naver-Client-Secret': CLIENT_SECRET}
      };
 
      request.get(options, function (error, response, body) {
@@ -1172,20 +1194,20 @@ apiRouter.post('/searchMBTI', (req, res) => {
                     ],
                     quickReplies: [{
                         action: "block",
-                        label: "MBTI 테스트 다시하기",
-                        message: "MBTI 테스트 다시하기",
+                        label: "테스트 다시하기",
+                        message: "테스트 다시하기",
                         blockId : "6297b10d5ceed96c38544a06"
                     },
                     {
                         action: "block",
-                        label: "자세한 결과 보기",
-                        message: "자세한 결과 보기",
+                        label: "상세결과보기",
+                        message: "상세결과보기",
                         blockId: "6297bc58ab89e678ee86b33a"
                     },
                     {
                         action: "block",
-                        label: "내 MBTI 관련 영상보기",
-                        message: "내 MBTI 관련 영상보기",
+                        label: "내 MBTI 관련영상 보기",
+                        message: "내 MBTI 관련영상 보기",
                         blockId: "629b6af95ceed96c38547c19"
                     }
                   ]
