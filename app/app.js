@@ -17,6 +17,25 @@ const CLIENT_SECRET = 'dmxhW0M_NA';
 
 let userDB = new Array();
 
+
+const mbtiDB= new Array();
+mbtiDB[0] = ['ISTP', 'https://ifh.cc/g/ac3LWB.jpg'];
+mbtiDB[1] = ['ISTJ', 'https://ifh.cc/g/VRFgFq.jpg'];
+mbtiDB[2] = ['ISFP', 'https://ifh.cc/g/svsfk3.jpg'];
+mbtiDB[3] = ['ISFJ', 'https://ifh.cc/g/5LMJjh.jpg'];
+mbtiDB[4] = ['INTP', 'https://ifh.cc/g/9HmqMW.jpg'];
+mbtiDB[5] = ['INTJ', 'https://ifh.cc/g/sGrpDH.jpg'];
+mbtiDB[6] = ['INFP','https://ifh.cc/g/0cK5Rq.jpg'];
+mbtiDB[7] = ['INFJ', 'https://ifh.cc/g/34opTR.jpg'];
+mbtiDB[8] = ['ESTP', 'https://ifh.cc/g/6wHm7a.jpg'];
+mbtiDB[9] = ['ESTJ', 'https://ifh.cc/g/fVGAnT.jpg'];
+mbtiDB[10] = ['ESFP', 'https://ifh.cc/g/0S0gk9.jpg'];
+mbtiDB[11] = ['ESFJ', 'https://ifh.cc/g/Zh8mVx.jpg'];
+mbtiDB[12] = ['ENTP', 'https://ifh.cc/g/opCw8r.jpg'];
+mbtiDB[13] = ['ENTJ', 'https://ifh.cc/g/PvlQyS.jpg'];
+mbtiDB[14] = ['ENFP', 'https://ifh.cc/g/AArxoZ.jpg'];
+mbtiDB[15] = ['ENFJ', 'https://ifh.cc/g/c6GRH1.jpg'];
+
 apiRouter.post('/sayHello', function(req, res) {
   const responseBody = {
     version: "2.0",
@@ -865,39 +884,45 @@ apiRouter.post('/result', (req, res) => {
     userDB[userId][3] += mbti;
     console.log(userDB[userId]);
     analysis_mbti(userDB[userId]);
+    var imageurl = url(userDB[userId]);
     const responseBody = {
       version: "2.0",
       template: {
-          outputs: [
-              {
-                  simpleText: {
-                      text: "당신의 MBTI는 : "+userDB[userId][4]
-                  }
+        outputs: [
+            {
+              "basicCard": {
+                "title": "당신의 MBTI는 : "+userDB[userId][4],
+                "thumbnail": {
+                  "imageUrl": imageurl
+                },
+                "buttons": [
+                    {
+                        action: "block",
+                        label: "자세한 결과 보기",
+                        message: "자세한 결과 보기",
+                        blockId: "6297bc58ab89e678ee86b33a"
+                    },
+                    {
+                        action: "block",
+                        label: "내 MBTI 특징은?",
+                        message: "내 MBTI 특징은?",
+                        blockId: "629ced645ceed96c38548222"
+                    },
+                    {
+                        action: "block",
+                        label: "내 MBTI 관련 영상보기",
+                        message: "내 MBTI 관련 영상보기",
+                        blockId: "629b6af95ceed96c38547c19"
+                    }
+                ]
               }
+            }
           ],
           quickReplies: [{
               action: "block",
               label: "MBTI 테스트 다시하기",
               message: "MBTI 테스트 다시하기",
               blockId : "6297b10d5ceed96c38544a06"
-          },
-          {
-              action: "block",
-              label: "자세한 결과 보기",
-              message: "자세한 결과 보기",
-              blockId: "6297bc58ab89e678ee86b33a"
-          },
-          {
-              action: "block",
-              label: "내 MBTI 특징은?",
-              message: "내 MBTI 특징은?",
-              blockId: "629ced645ceed96c38548222"
-          },
-          {
-            action: "block",
-            label: "내 MBTI 관련 영상 보러 가기",
-            message: "내 MBTI 관련 영상 보러 가기",
-            blockId: "629b6af95ceed96c38547c19"
           }
         ]
       }
@@ -1011,56 +1036,6 @@ function count_mbti(item_list, mbti_ch) {
     return result;
 }
 
-apiRouter.post('/searchmbti', (req, res) => {
-    var userId = req.body.userRequest.user.id;
-    var userMbti = userDB[userId][4];
-    var api_url = 'https://openapi.naver.com/v1/search/blog?query='+ encodeURI(userMbti + '특징');
-    var request = require('request');
-    console.log(api_url);
-
-    var options = {
-        url: api_url,
-        headers: {'X-Naver-Client-Id':CLIENT_ID, 'X-Naver-Client-Secret': CLIENT_SECRET}
-     };
-
-     request.get(options, function (error, response, body) {
-        if (!error && response.statusCode == 200) {
-            var result = JSON.parse(body);
-            console.log(result.items);
-            const responseBody = {
-                version: "2.0",
-                template: {
-                    outputs: [
-                        {
-                            simpleText: {
-                                text: result.items[0].link
-                            }
-                        }
-                    ],
-                    quickReplies: [{
-                        action: "block",
-                        label: "MBTI 테스트 다시하기",
-                        message: "MBTI 테스트 다시하기",
-                        blockId : "6297b10d5ceed96c38544a06"
-                    },
-                    {
-                        action: "block",
-                        label: "자세한 결과 보기",
-                        message: "자세한 결과 보기",
-                        blockId: "6297bc58ab89e678ee86b33a"
-                    }
-                  ]
-                }
-            }
-            res.status(200).send(responseBody);
-        } else {
-          res.status(response.statusCode).end();
-          console.log('error = ' + response.statusCode);
-        }
-    });
-
-});
-
 apiRouter.post('/mbtivideo', (req, res) => {
     var userId = req.body.userRequest.user.id;
     var userMbti = userDB[userId][4];
@@ -1144,12 +1119,11 @@ apiRouter.post('/mbtivideo', (req, res) => {
 });
 
 apiRouter.post('/searchMBTI', (req, res) => {
-    var imageurl=""
     var userId = req.body.userRequest.user.id;
     var userMbti = userDB[userId][4];
     var api_url = 'https://openapi.naver.com/v1/search/blog?query='+ encodeURI(userMbti + '특징');
     var request = require('request');
-    url(userDB);
+    var imagerul = url(userDB[userId]);
     console.log(api_url);
     
     var options = {
@@ -1160,26 +1134,40 @@ apiRouter.post('/searchMBTI', (req, res) => {
      request.get(options, function (error, response, body) {
         if (!error && response.statusCode == 200) {
             var result = JSON.parse(body);
-            console.log(result.items);
+            console.log(result.items, "i'm version2");
             const responseBody = {
                 version: "2.0",
                 template: {
                     outputs: [
                         {
-                            "basicCard": {
-                                "title": userMbti,
-                                "description": userMbti+"의 특징은?",
-                                "thumbnail": {
-                                  "imageUrl": imageurl
+                            "listCard" : {
+                                "header": {
+                                    "title":userMbti+" 특징은?"
                                 },
-                                "buttons": [
-                                  {
-                                    "action":  "webLink",
-                                    "label": "알아보기",
-                                    "webLinkUrl": result.items[0].link
-                                  }
+                                "items": [
+                                    {
+                                        "title": result.items[0].title.replace(/<b>/g, '').replace(/<\/b>/g, ''),
+                                        "description": result.items[0].description,
+                                        "link":{
+                                            "web": result.items[0].link
+                                          }
+                                    },
+                                    {
+                                        "title": result.items[1].title.replace(/<b>/g, '').replace(/<\/b>/g, ''),
+                                        "description": result.items[1].description,
+                                        "link":{
+                                            "web": result.items[1].link
+                                          }
+                                    },
+                                    {
+                                        "title": result.items[2].title.replace(/<b>/g, '').replace(/<\/b>/g, ''),
+                                        "description": result.items[2].description,
+                                        "link":{
+                                            "web": result.items[2].link
+                                          }
+                                    }
                                 ]
-                              }
+                            }
                         }
                     ],
                     quickReplies: [{
@@ -1193,6 +1181,12 @@ apiRouter.post('/searchMBTI', (req, res) => {
                         label: "자세한 결과 보기",
                         message: "자세한 결과 보기",
                         blockId: "6297bc58ab89e678ee86b33a"
+                    },
+                    {
+                        action: "block",
+                        label: "내 MBTI 관련 영상보기",
+                        message: "내 MBTI 관련 영상보기",
+                        blockId: "629b6af95ceed96c38547c19"
                     }
                   ]
                 }
@@ -1207,32 +1201,12 @@ apiRouter.post('/searchMBTI', (req, res) => {
 });
 
 function url(user){
-    
-    let mbtiDB = new Array();
-
-mbtiDB=['ISTP','ISTJ','ISFP','ISFJ','INTP','INTJ','INFP','INFJ','ESTP','ESTJ','ESFP','ESFJ','ENTP','ENTJ','ENFP','ENFJ']
-mbtiDB[0][0]='https://ifh.cc/g/ac3LWB.jpg';
-mbtiDB[1][0]='https://ifh.cc/g/VRFgFq.jpg';
-mbtiDB[2][0]='https://ifh.cc/g/svsfk3.jpg';
-mbtiDB[3][0]='https://ifh.cc/g/5LMJjh.jpg';
-mbtiDB[4][0]='https://ifh.cc/g/9HmqMW.jpg';
-mbtiDB[5][0]='https://ifh.cc/g/sGrpDH.jpg';
-mbtiDB[6][0]='https://ifh.cc/g/0cK5Rq.jpg';
-mbtiDB[7][0]='https://ifh.cc/g/34opTR.jpg';
-mbtiDB[8][0]='https://ifh.cc/g/6wHm7a.jpg';
-mbtiDB[9][0]='https://ifh.cc/g/fVGAnT.jpg';
-mbtiDB[10][0]='https://ifh.cc/g/0S0gk9.jpg';
-mbtiDB[11][0]='https://ifh.cc/g/Zh8mVx.jpg';
-mbtiDB[12][0]='https://ifh.cc/g/opCw8r.jpg';
-mbtiDB[13][0]='https://ifh.cc/g/PvlQyS.jpg';
-mbtiDB[14][0]='https://ifh.cc/g/AArxoZ.jpg';
-mbtiDB[15][0]='https://ifh.cc/g/c6GRH1.jpg';
-
     for(let i=0; i<16;i++){
-        if(user[userId][4]==mbtiDB[i]){
-            imageurl=mbtiDB[i][0]
+        if(user[4]==mbtiDB[i][0]){
+            imageurl=mbtiDB[i][1];
         }
     }
+    return imageurl;
 }
 
 app.listen((process.env.PORT || 3000), function() {
