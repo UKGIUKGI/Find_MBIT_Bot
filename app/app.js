@@ -689,7 +689,7 @@ apiRouter.post('/question16', (req, res) => {
             outputs: [
                 {
                     simpleText: {
-                        text: '[Question 16/20]\n이메일에 가능한 빨리 회신하려고 하고 지저분한 편지함을 참을 수 없다.'
+                        text: '[Question 16/20]\n이메일에 가능한 빨리 회신하려고 하고 지저분한 편지함을 참을 수 없습니다.'
                     }
                 }
             ],
@@ -729,7 +729,7 @@ apiRouter.post('/question17', (req, res) => {
             outputs: [
                 {
                     simpleText: {
-                        text: '[Question 17/20]\n당일에 갑자기 잡히는 약속이 부담스럽다.'
+                        text: '[Question 17/20]\n당일에 갑자기 잡히는 약속은 부담스럽습니다.'
                     }
                 }
             ],
@@ -769,7 +769,7 @@ apiRouter.post('/question18', (req, res) => {
             outputs: [
                 {
                     simpleText: {
-                        text: '[Question 18/20]\n비행기에 타기 전 만약 비행기에 테러범이 있으면 어떻게 행동할지 상상해봤다.'
+                        text: '[Question 18/20]\n비행기에 타기 전 만약 비행기에 테러범이 있으면 어떻게 행동할지 상상해 본 적이 있습니다.'
                     }
                 }
             ],
@@ -849,7 +849,7 @@ apiRouter.post('/question20', (req, res) => {
             outputs: [
                 {
                     simpleText: {
-                        text: '[Question 20/20]\n마지막 여행지를 향해 가던 중 흥미로운 장소를 발견했을 때, 남은 일정을 고려하는 편이다.'
+                        text: '[Question 20/20]\n마지막 여행지를 향해 가던 중 흥미로운 장소를 발견했을 때, 남은 일정을 고려하는 편입니다.'
                     }
                 }
             ],
@@ -1127,6 +1127,12 @@ apiRouter.post('/mbtivideo', (req, res) => {
                         label: "상세결과보기",
                         message: "상세결과보기",
                         blockId: "6297bc58ab89e678ee86b33a"
+                    },
+                    {
+                        action: "block",
+                        label: "내 MBTI 특징은?",
+                        message: "내 MBTI 특징은?",
+                        blockId: "629ced645ceed96c38548222"
                     }
                   ]
                 }
@@ -1145,7 +1151,7 @@ apiRouter.post('/searchMBTI', (req, res) => {
     var userMbti = userDB[userId][4];
     var api_url = 'https://openapi.naver.com/v1/search/blog?query='+ encodeURI(userMbti + '특징');
     var request = require('request');
-    var imagerul = url(userDB[userId]);
+    var imageurl = url(userDB[userId]);
     console.log(api_url);
     
     var options = {
