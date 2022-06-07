@@ -57,7 +57,8 @@ __user__
    ```
    npm install
    ```
-3. Put your secret API KEY in `.env`  If you have not installed dotenv module, enter the following command to install.
+3. Put your secret API KEY in `.env`  
+   If you have not installed dotenv module, enter the following command to install.
    ```
    npm install dotenv
    ```
@@ -65,10 +66,10 @@ __user__
 
 __developer__
 1. 카카오 채널 생성 및 OBT 신청하기
-2. 채널 설정
-  a) 스킬 생성 : routing이 되는 url 입력
-  b) 블록 생성하여 스킬과 연결
-  c) 봇 응답 - 스킬데이터 사용 선택
+2. 채널 설정  
+  - 스킬 생성 : routing이 되는 url 입력  
+  - 블록 생성하여 스킬과 연결  
+  - 봇 응답 - 스킬데이터 사용 선택
 3. git clone
 4. 디렉토리에 있는 app.js에서 각 route마다 다음으로 연결될 블록 ID 입력  
    사용자 발화시 UserRequest.blockid나
@@ -93,7 +94,7 @@ __developer__
 <img src="hello.jpg" width="300px" height="300px"></img><br/>       
 
 * 전송된 메시지에서 "MBTI 테스트 시작하기" 버튼을 터치하면 MBTI 테스트를 진행할 수 있습니다.
-<img src="test.jpg" width="300px" height="300px"></img><br/>  
+<img src="test.jpg" width="300px" height="400px"></img><br/>  
 
 * 20개의 질문에 모두 응답을 하면 MBTI 결과가 나타납니다. 본인의 MBTI 관련 게시물들도 확인할 수 있으니 구경해 보세요!
 <img src="result.jpg" width="300px" height="300px"></img><br/>
