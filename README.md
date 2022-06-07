@@ -18,8 +18,8 @@
 4. [Usage](#usage)
 5. [Roadmap](#roadmap)
 6. [Contributing](#contributing)
-7. [Contact](#contact)          
-
+7. [License](#license)
+8. [Contact](#contact)
 
 
 
@@ -57,8 +57,7 @@ __user__
    ```
    npm install
    ```
-3. Put your secret API KEY in ```.env```
-   If you have not installed dotenv module, enter the following command to install.
+3. Put your secret API KEY in `.env`  If you have not installed dotenv module, enter the following command to install.
    ```
    npm install dotenv
    ```
@@ -67,16 +66,18 @@ __user__
 __developer__
 1. 카카오 채널 생성 및 OBT 신청하기
 2. 채널 설정
-   a) 스킬 생성 : routing이 되는 url 입력
-   b) 블록 생성하여 스킬과 연결
-   c) 봇 응답 - 스킬데이터 사용 선택
+  a) 스킬 생성 : routing이 되는 url 입력
+  b) 블록 생성하여 스킬과 연결
+  c) 봇 응답 - 스킬데이터 사용 선택
 3. git clone
-4. 디렉토리에 있는 app.js에서 각 route마다 다음으로 연결될 블록 ID 입력
+4. 디렉토리에 있는 app.js에서 각 route마다 다음으로 연결될 블록 ID 입력  
    사용자 발화시 UserRequest.blockid나
    i.kakao.com의 블록에서 url을 통해 확인할 수 있음
 5. 배포
 6. npm install
 7. 실행
+
+
 
 <!-- USAGE EXAMPLES -->
 ## Usage
@@ -126,6 +127,15 @@ __developer__
 3. Commit your Changes
 4. Push to the Branch 
 5. Open a Pull Request
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+
+<!-- License -->
+## License
+
+Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
