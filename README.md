@@ -68,7 +68,7 @@
    ```
 7. Put your secret API KEY in `.env`  
     This project needs Naver Open API(Client ID, Client Secret) & Kakao API(Kakao REST API Key)
-8. If modules are not installed, enter the following command to install:  
+8. If modules are not installed, enter the following command to install:
    ```
    npm install express --save
    npm install router
@@ -89,8 +89,8 @@
    - 또는 하단 챗봇 링크에 접속해서 채널을 추가해 주세요.  
     link: <http://pf.kakao.com/_jAjtb>  
    <img src="channel.jpg" width="270px" height="450px"></img><br/>  
-   - 아래의 qr코드를 스캔하면 챗봇과 바로 채팅을 시작할 수 있습니다.    
-   <img src="qrcode.jpg" width="250px" height="250px"></img><br/>   
+   - 아래의 qr코드를 스캔해서 채널을 추가하셔도 됩니다.  
+   <img src="qrcode.jpg" width="250px" height="250px"></img><br/>  
    
 2. 채팅창에 "안녕"을 입력하면 챗봇이 메시지를 전송합니다.  
 <img src="hello.jpg" width="300px" height="300px"></img><br/>  
