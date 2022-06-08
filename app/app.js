@@ -485,7 +485,7 @@ apiRouter.post('/question8', (req, res) => {
             outputs: [
                 {
                     simpleText: {
-                        text: '[Question 11/20]\n팀플을 하는 경우, 충실하지만 실적을 못 내는 팀원을 제명하기 어려워합니다.'
+                        text: '[Question 11/20]\n팀플을 하는 경우, 무임승차하는 팀원을 제명하기 어려워합니다.'
                     }
                 }
             ],
@@ -649,21 +649,21 @@ apiRouter.post('/question8', (req, res) => {
             outputs: [
                 {
                     simpleText: {
-                        text: '[Question 15/20]\n친구: 우울해서 아이패드 샀어'
+                        text: '[Question 15/20]\n친구가 약속에 늦었을 때'
                     }
                 }
             ],
             quickReplies: [
                 {
                     action: "block",
-                    label: "왜ㅠㅠ무슨일 있었어?",
-                    message: "왜ㅠㅠ무슨일 있었어?",
+                    label: "사과를 하면 마음이 풀린다.",
+                    message: "사과를 하면 마음이 풀린다.",
                     blockId: "6294c467e7a0253c7662acac"
                 },
                 {
                     action: "block",
-                    label: "어떤 기종샀어?",
-                    message: "어떤 기종샀어?",
+                    label: "이유가 있으면 마음이 풀린다.",
+                    message: "이유가 있으면 마음이 풀린다.",
                     blockId: "6294c467e7a0253c7662acac"
                 }
             ]
@@ -900,10 +900,9 @@ apiRouter.post('/result', (req, res) => {
                 },
                 "buttons": [
                     {
-                        action: "block",
-                        label: "상세결과보기",
-                        message: "상세결과보기",
-                        blockId: "6297bc58ab89e678ee86b33a"
+                        action: "share",
+                        label: "공유하기",
+                        message: "공유하기"
                     },
                     {
                         action: "block",
@@ -916,6 +915,12 @@ apiRouter.post('/result', (req, res) => {
             }
           ],
           quickReplies: [{
+            action: "block",
+            label: "상세결과보기",
+            message: "상세결과보기",
+            blockId: "6297bc58ab89e678ee86b33a"
+          },
+          {
             action: "block",
             label: "내 MBTI 특징은?",
             message: "내 MBTI 특징은?",
@@ -1175,21 +1180,21 @@ apiRouter.post('/searchMBTI', (req, res) => {
                                 "items": [
                                     {
                                         "title": result.items[0].title.replace(/<b>/g, '').replace(/<\/b>/g, ''),
-                                        "description": result.items[0].description,
+                                        "description": result.items[0].description.replace(/<b>/g, '').replace(/<\/b>/g, ''),
                                         "link":{
                                             "web": result.items[0].link
                                           }
                                     },
                                     {
                                         "title": result.items[1].title.replace(/<b>/g, '').replace(/<\/b>/g, ''),
-                                        "description": result.items[1].description,
+                                        "description": result.items[1].description.replace(/<b>/g, '').replace(/<\/b>/g, ''),
                                         "link":{
                                             "web": result.items[1].link
                                           }
                                     },
                                     {
                                         "title": result.items[2].title.replace(/<b>/g, '').replace(/<\/b>/g, ''),
-                                        "description": result.items[2].description,
+                                        "description": result.items[2].description.replace(/<b>/g, '').replace(/<\/b>/g, ''),
                                         "link":{
                                             "web": result.items[2].link
                                           }
