@@ -14,7 +14,7 @@
 
 1. [About The Project](#about-the-project)
 2. [Built With](#built-with)
-3. [Installation](#installation)
+3. [Getting Started](#getting-started)
 4. [Usage](#usage)
 5. [Roadmap](#roadmap)
 6. [Contributing](#contributing)
@@ -47,8 +47,9 @@
 
 
 
-## Installation
+## Getting Started
 __user__
+0. Install Node.js(https://nodejs.org/ko/)
 1. Clone the repo
    ```
    git clone http://khuhub.khu.ac.kr/2018103692/find_mbti_bot
@@ -58,8 +59,12 @@ __user__
    npm install
    ```
 3. Put your secret API KEY in `.env`  
-   If you have not installed dotenv module, enter the following command to install.
+    This project needs Naver Open API(Client ID, Client Secret) & Kakao API(Kakao REST API Key)
+   
+4. If modules are not installed, enter the following command to install:  
    ```
+   npm install express --save
+   npm install router
    npm install dotenv
    ```
 
@@ -74,32 +79,33 @@ __developer__
 4. 디렉토리에 있는 app.js에서 각 route마다 다음으로 연결될 블록 ID 입력  
    사용자 발화시 UserRequest.blockid나
    i.kakao.com의 블록에서 url을 통해 확인할 수 있음
-5. 배포
-6. npm install
-7. 실행
+5. 배포 및 실행
+
+
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 
 
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-* "MBTI 챗봇" 채널을 추가해 주세요.
+* "MBTI 챗봇" 채널을 추가해 주세요.  
  link: <http://pf.kakao.com/_jAjtb>
-<img src="channel.jpg" width="270px" height="450px"></img><br/>                
+<img src="channel.jpg" width="270px" height="450px"></img><br/>  
 
-* 또는 아래의 qr코드를 스캔하면 챗봇과 바로 채팅을 시작할 수 있습니다.             
-<img src="qrcode.jpg" width="250px" height="250px"></img><br/>              
+* 또는 아래의 qr코드를 스캔하면 챗봇과 바로 채팅을 시작할 수 있습니다.  
+<img src="qrcode.jpg" width="250px" height="250px"></img><br/>  
 
-* 채팅창에 "안녕"을 입력하면 챗봇이 메시지를 전송합니다.           
-<img src="hello.jpg" width="300px" height="300px"></img><br/>       
+* 채팅창에 "안녕"을 입력하면 챗봇이 메시지를 전송합니다.     
+<img src="hello.jpg" width="300px" height="300px"></img><br/>  
 
-* 전송된 메시지에서 "MBTI 테스트 시작하기" 버튼을 터치하면 MBTI 테스트를 진행할 수 있습니다.
+* 전송된 메시지에서 "MBTI 테스트 시작하기" 버튼을 터치하면 MBTI 테스트를 진행할 수 있습니다.  
 <img src="test.jpg" width="300px" height="400px"></img><br/>  
 
-* 20개의 질문에 모두 응답을 하면 MBTI 결과가 나타납니다. 본인의 MBTI 관련 게시물들도 확인할 수 있으니 구경해 보세요!
-<img src="result.jpg" width="300px" height="300px"></img><br/>
+* 20개의 질문에 모두 응답을 하면 MBTI 결과가 나타납니다. 본인의 MBTI 관련 게시물들도 확인할 수 있으니 구경해 보세요!  
+<img src="result.jpg" width="300px" height="350px"></img><br/>  
 
-* 테스트를 하다가 처음부터 다시 시작하고 싶을 때에는 채팅창에 "테스트 시작하기"를 입력해 주세요.
+* 테스트를 하다가 처음부터 다시 시작하고 싶을 때에는 채팅창에 "테스트 시작하기"를 입력해 주세요.  
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
