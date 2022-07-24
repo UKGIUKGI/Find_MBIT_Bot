@@ -3,7 +3,7 @@
 <br />
 <div align="center">
 
-  <img width="300" height="300" src="mbti.jpg">
+  <img width="300" height="300" src="/Pictures/mbti.jpg">
   <h1 align="center">Find MBTI chatbot</h1>
   <h1 align="center">챗봇으로 자신의 MBTI를 간편하게 찾아 보세요!</h1>
 
