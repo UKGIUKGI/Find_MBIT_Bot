@@ -89,18 +89,18 @@
    - 카카오톡 채널에 "MBTI 챗봇"을 검색해서 채널을 추가할 수 있습니다.  
    - 또는 하단 챗봇 링크에 접속해서 채널을 추가해 주세요.  
     link: <http://pf.kakao.com/_jAjtb>  
-   <img src="channel.jpg" width="270px" height="450px"></img><br/>  
+   <img src="/Pictures/channel.jpg" width="270px" height="450px"></img><br/>  
    - 아래의 qr코드를 스캔해서 채널을 추가하셔도 됩니다.  
-   <img src="qrcode.jpg" width="250px" height="250px"></img><br/>  
+   <img src="/Pictures/qrcode.jpg" width="250px" height="250px"></img><br/>  
    
 2. 채팅창에 "안녕"을 입력하면 챗봇이 메시지를 전송합니다.  
-<img src="hello.jpg" width="300px" height="300px"></img><br/>  
+<img src="/Pictures/hello.jpg" width="300px" height="300px"></img><br/>  
 
 3. 전송된 메시지에서 "MBTI 테스트 시작하기" 버튼을 터치하면 MBTI 테스트를 진행할 수 있습니다.  
-<img src="test.jpg" width="300px" height="400px"></img><br/>  
+<img src="/Pictures/test.jpg" width="300px" height="400px"></img><br/>  
 
 4. 20개의 질문에 모두 응답을 하면 MBTI 결과가 나타납니다. 본인의 MBTI 관련 게시물들도 확인할 수 있으니 구경해 보세요!  
-<img src="result_new.jpg" width="300px" height="350px"></img><br/>  
+<img src="/Pictures/result_new.jpg" width="300px" height="350px"></img><br/>  
 
 5. 테스트를 하다가 처음부터 다시 시작하고 싶을 때에는 채팅창에 "테스트 시작하기"를 입력해 주세요.  
 
