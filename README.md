@@ -57,7 +57,7 @@
   - 봇 응답 - 스킬데이터 사용 선택
 3. Clone the repo
    ```
-   git clone http://khuhub.khu.ac.kr/2018103692/find_mbti_bot
+   git clone https://github.com/UKGIUKGI/Find_MBIT_Bot.git
    ```
 4. 디렉토리에 있는 app.js에서 각 route마다 다음으로 연결될 블록 ID 입력  
    사용자 발화시 req.body.userRequest.block.id나
@@ -152,6 +152,6 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 * 공정훈 : kjhun1208@khu.ac.kr
 * 고민경: komg00@khu.ac.kr 
 
-* Project Link : http://khuhub.khu.ac.kr/2018103692/find_mbti_bot
+* Project Link : https://github.com/UKGIUKGI/Find_MBIT_Bot.git
 
 <p align="right">(<a href="#top">back to top</a>)</p>
